@@ -28,4 +28,6 @@ TODO: Write credits
 
 ## License
 
+1. (LICENSE)[https://github.com/sebworks/AtomicComponent/blob/master/LICENSE]
+
 TODO: Write license
