@@ -7,10 +7,9 @@
 
 'use strict';
 
-var AtomicComponent = require( './AtomicComponent' );
-var TYPES = require( './utilities/config' ).TYPES;
-
-Organism = AtomicComponent.extend( {
+var AtomicComponent = require( '../AtomicComponent' );
+var TYPES = require( '../../utilities/config' ).TYPES;
+var Organism = AtomicComponent.extend( {
   TYPE: TYPES.ORGANISM,
   CHILD_TYPES: [TYPES.MOLECULE, TYPES.ATOM]
 } );
