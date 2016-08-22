@@ -1,7 +1,11 @@
 
+/* ==========================================================================
+   Data set
+   ========================================================================== */
+
 'use strict';
 
-var _assign = require('./assign').assign;
+var _assign = require('./object-assign').assign;
 
 /**
  * Converts a string from selector-case to camelCase.

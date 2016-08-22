@@ -9,15 +9,15 @@
    ========================================================================== */
 'use strict';
 
-var _assign = require('../utilities/assign').assign;
+var _assign = require('../utilities/object-assign').assign;
 var _isFunction = require('../utilities/type-checkers').isFunction;
+var classList = require('../utilities/dom-class-list');
 var dataSet = require('../utilities/data-set').dataSet;
 var Delegate = require('dom-delegate').Delegate;
 var Events = require('../mixins/Events');
 
 function AtomicComponent(element, attrs) {
   this.u_id = this._uniqueId('ac');
-  this.ui = {};
   this.element = element;
   attrs = attrs || (attrs = {});
   _assign(this, attrs, this.defaults);
@@ -27,7 +27,7 @@ function AtomicComponent(element, attrs) {
 }
 
 // Public Methods and properties.
-_assign(AtomicComponent.prototype, Events, {
+_assign(AtomicComponent.prototype, Events, classList, {
 
   tagName: 'div',
 
@@ -47,6 +47,7 @@ _assign(AtomicComponent.prototype, Events, {
     } else {
       this.setElement(this.element);
     }
+    this.element.setAttribute( 'data-bound', true );
   },
 
   setElement: function(element) {
@@ -59,17 +60,23 @@ _assign(AtomicComponent.prototype, Events, {
 
   setCachedElements: function() {
     var key;
-
-    for (key in this.ui) {
-      if (this.ui.hasOwnProperty(key)) {
-        this[key] = this.element.querySelector(this.ui[key]);
+    var ui = _assign( {}, this.ui );
+    var element;
+    for ( key in ui ) {
+      if ( ui.hasOwnProperty( key ) ) {
+        element = this.element.querySelectorAll( ui[key] );
+        if ( element.length === 1 ) {
+          ui[key] = element[0];
+        } else if ( element.length > 1 ) {
+          ui[key] = element
+        }
       }
     }
 
-    return this;
+    return this.ui = ui;
   },
 
-  remove: function() {
+  destroy: function() {
     if (this.element) {
       this.element.parentNode.removeChild(this.element);
       if (this.element.view) delete this.element.view;
@@ -90,33 +97,22 @@ _assign(AtomicComponent.prototype, Events, {
     }
   },
 
-  addClass: function(className, element) {
-    (element || this.element).classList.add(className);
-    return this;
-  },
-
-  removeClass: function(className, element) {
-    (element || this.element).classList.remove(className);
-
-    return this;
-  },
-
   delegateEvents: function(events) {
     var key;
     var method;
     var match;
     var delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
-    events = events || (events = this.events);
-    if (!events) return this;
+    events = events || ( events = this.events );
+    if ( !events ) return this;
     this.undelegateEvents();
-    this._delegate = new Delegate(this.element);
-    for (key in events) {
+    this._delegate = new Delegate( this.element );
+    for ( key in events ) {
       method = events[key];
-      if (_isFunction(this[method])) method = this[method];
-      if (!method) continue;
-      match = key.match(delegateEventSplitter);
-      this.delegate(match[1], match[2], method.bind(this));
+      if ( _isFunction( this[method] ) ) method = this[method];
+      if ( !method ) continue;
+      match = key.match( delegateEventSplitter );
+      this.delegate( match[1], match[2], method.bind( this ) );
     }
 
     return this;
@@ -132,6 +128,8 @@ _assign(AtomicComponent.prototype, Events, {
       this._delegate.destroy();
     }
 
+    this.element.removeAttribute( 'data-bound' )
+
     return this;
   },
 
@@ -141,32 +139,36 @@ _assign(AtomicComponent.prototype, Events, {
 
 });
 
-
 // Static Methods
 AtomicComponent.extend = function extend(attributes) {
   function child() {
     this._super = AtomicComponent.prototype;
+    this.ui = attributes.ui;
     return AtomicComponent.apply(this, arguments);
   }
-  child.prototype = Object.create(AtomicComponent.prototype);
+  child.prototype = Object.create( AtomicComponent.prototype );
   _assign(child.prototype, attributes);
   _assign(child, AtomicComponent);
-  if (attributes && attributes.hasOwnProperty('selector')) {
-    child.selector = attributes.selector;
+
+  if ( attributes.hasOwnProperty( 'classes' ) &&
+       attributes.classes.hasOwnProperty( 'baseElement' ) ) {
+    child.selector = attributes.classes.baseElement;
   }
+  child.constants = {};
 
   return child;
 };
 
-
 AtomicComponent.init = function init() {
-  var elements = document.querySelectorAll(this.selector);
+  var elements = document.querySelectorAll( this.selector );
   var element;
   var view;
 
-  for (var i = 0; i < elements.length; ++i) {
+  for ( var i = 0; i < elements.length; ++i ) {
     element = elements[i];
-    view = new this(element);
+    if( element.hasAttribute( 'data-bound' ) === false ) {
+      view = new this( element );
+    }
   }
 
   return this;

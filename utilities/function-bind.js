@@ -1,8 +1,8 @@
 
 /* ==========================================================================
-   fnBind
+   Function bind
 
-   Code copied from the following with minimal modifications :
+   Contains code copied from the following with minimal modifications :
 
    - https://raw.githubusercontent.com/Modernizr/Modernizr/
      74655c45ad2cd05c002e4802cdd74cba70310f08/src/fnBind.js
@@ -21,19 +21,18 @@
  * Function.prototype.bind polyfill.
  *
  * @access private
- * @function fnBind
+ * @function bind
  * @param {Function} fn - A function you want to change `this` reference to.
  * @param {Object} context - The `this` you want to call the function with.
  * @returns {Function} The wrapped version of the supplied function.
  */
-function fnBind(fn, context) {
-    return function() {
-        return fn.apply(context, arguments);
-    };
+function bind(fn, context) {
+  return function() {
+    return fn.apply(context, arguments);
+  };
 }
-
 
 // Expose public methods.
 module.exports = {
-    fnBind: fnBind
+  bind: bind
 };
