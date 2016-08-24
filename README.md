@@ -3,8 +3,8 @@
 Framework for building Atomic Components
 
 ## Installation
-
-  - Run `gulp build`.
+  - Run `npm install`.
+  - Run `gulp`.
   - Start your webserver of choice (`python -m SimpleHTTPServer 8080`, if python installed).
   - Visit the test.html page in your browser.
 
