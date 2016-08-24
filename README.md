@@ -1,14 +1,16 @@
 # AtomicComponent
 
-TODO: Write a project description
+Framework for building Atomic Components
 
 ## Installation
 
-TODO: Describe the installation process
+  - Run `gulp build`.
+  - Start your webserver of choice (`python -m SimpleHTTPServer 8080`, if python installed).
+  - Visit the test.html page in your browser.
 
 ## Usage
 
-TODO: Write usage instructions
+This serves as a WIP for hashing out ideals related to building Atomic components.
 
 ## Contributing
 
@@ -18,9 +20,6 @@ TODO: Write usage instructions
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-## History
-
-TODO: Write history
 
 ## Credits
 
