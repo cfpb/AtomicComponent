@@ -9,8 +9,8 @@
    ========================================================================== */
 'use strict';
 
-var _assign = require('../utilities/object-assign').assign;
-var _isFunction = require('../utilities/type-checkers').isFunction;
+var assign = require('../utilities/object-assign').assign;
+var isFunction = require('../utilities/type-checkers').isFunction;
 var classList = require('../utilities/dom-class-list');
 var dataSet = require('../utilities/data-set').dataSet;
 var Delegate = require('dom-delegate').Delegate;
@@ -20,18 +20,19 @@ function AtomicComponent(element, attrs) {
   this.u_id = this._uniqueId('ac');
   this.element = element;
   attrs = attrs || (attrs = {});
-  _assign(this, attrs, this.defaults);
+  assign(this, attrs, this.defaults);
   this.ensureElement();
   this.setCachedElements();
   this.initialize.apply(this, arguments);
+  this.trigger( 'initialized' );
 }
 
 // Public Methods and properties.
-_assign(AtomicComponent.prototype, Events, classList, {
+assign(AtomicComponent.prototype, Events, classList, {
 
   tagName: 'div',
 
-  initialize: function initialize() {},
+  initialize: function(){},
 
   render: function() {
     return this;
@@ -39,7 +40,7 @@ _assign(AtomicComponent.prototype, Events, classList, {
 
   ensureElement: function() {
     if (!this.element) {
-      var attrs = _assign({}, this.attributes);
+      var attrs = assign({}, this.attributes);
       if (this.id) attrs.id = this.id || this.u_id;
       if (this.className) attrs['class'] = this.className;
       this.setElement(document.createElement(this.tagName));
@@ -60,11 +61,12 @@ _assign(AtomicComponent.prototype, Events, classList, {
 
   setCachedElements: function() {
     var key;
-    var ui = _assign( {}, this.ui );
+    var ui = assign( {}, this.ui );
     var element;
     for ( key in ui ) {
       if ( ui.hasOwnProperty( key ) ) {
         element = this.element.querySelectorAll( ui[key] );
+
         if ( element.length === 1 ) {
           ui[key] = element[0];
         } else if ( element.length > 1 ) {
@@ -73,6 +75,7 @@ _assign(AtomicComponent.prototype, Events, classList, {
       }
     }
 
+    console.log( ui )
     return this.ui = ui;
   },
 
@@ -84,6 +87,7 @@ _assign(AtomicComponent.prototype, Events, classList, {
     }
 
     this.undelegateEvents();
+    this.trigger( 'destroyed' );
 
     return true;
   },
@@ -109,13 +113,14 @@ _assign(AtomicComponent.prototype, Events, classList, {
     this._delegate = new Delegate( this.element );
     for ( key in events ) {
       method = events[key];
-      if ( _isFunction( this[method] ) ) method = this[method];
+      if ( isFunction( this[method] ) ) method = this[method];
       if ( !method ) continue;
       match = key.match( delegateEventSplitter );
       this.delegate( match[1], match[2], method.bind( this ) );
     }
+    this.trigger( 'bound' );
 
-    return this;
+   return this;
   },
 
   delegate: function(eventName, selector, listener) {
@@ -137,18 +142,17 @@ _assign(AtomicComponent.prototype, Events, classList, {
     return prefix + '_' + Math.random().toString(36).substr(2, 9);
   }
 
-});
+} );
 
 // Static Methods
 AtomicComponent.extend = function extend(attributes) {
   function child() {
-    this._super = AtomicComponent.prototype;
-    this.ui = attributes.ui;
+    this.super = AtomicComponent.prototype;
     return AtomicComponent.apply(this, arguments);
   }
   child.prototype = Object.create( AtomicComponent.prototype );
-  _assign(child.prototype, attributes);
-  _assign(child, AtomicComponent);
+  assign(child.prototype, attributes);
+  assign(child, AtomicComponent);
 
   if ( attributes.hasOwnProperty( 'classes' ) &&
        attributes.classes.hasOwnProperty( 'baseElement' ) ) {

@@ -17,27 +17,59 @@ var TableOrganism = Organism.extend( {
   },
 
   events: {
-    'click .sortable': 'sortTable'
+    'click .sortable': 'onSort'
   },
 
   ui: {
-    sortables:        '.sortable',
     tableBody:        'tbody',
-    activeSortButton: null
+    activeSortButton: '.sort-up, .sort-down'
   },
 
   initialize: function() {
-    this.isTableSorted = false;
+    this.activeSortClass = '';
     this.sortColumnIndex = UNDEFINED;
     this.sortDirection = UNDEFINED;
     this.tableData = [];
+    this.bindProperties();
+    if ( this.ui.activeSortButton ) {
+      this.sortColumnIndex = this.getColumnIndex();
+      this.sortDirection = DIRECTIONS.UP;
+      this.updateTable();
+    }
   },
 
+  bindProperties: function() {
+    var sortDirection;
+
+    Object.defineProperty( this, 'sortDirection', {
+      configurable: true,
+      get: function() {
+        if ( sortDirection === DIRECTIONS.UP ) {
+          this.activeSortClass = this.classes.sortUp;
+        } else if( sortDirection === DIRECTIONS.DOWN )  {
+          this.activeSortClass = this.classes.sortDown;
+        }
+
+        return sortDirection;
+      },
+      set: function(value) {
+        sortDirection = value;
+      }
+    } );
+  },
+
+  getColumnIndex: function( element ) {
+    return closest( element || this.ui.activeSortButton , 'td, th' ).cellIndex;
+  },
+
+  updateTable: function(){
+    return this.updateTableData() && this.updateTableDom();
+  },
  /**
    * Updates the table in the DOM
    * @param { number } columnIndex - The index of the column used for sorting
    */
-  getTableData: function ( columnIndex ) {
+  updateTableData: function ( columnIndex ) {
     columnIndex = columnIndex || this.sortColumnIndex;
     var cell;
 
@@ -73,14 +105,17 @@ var TableOrganism = Organism.extend( {
   tableDataSorter : function( direction, sortType ) {
     return function( a, b ) {
        var sign = 1;
+       var order = 0;
+       var regex = /[^\d.-]/g;
+
       // Set a and b to the first Array in each Array-of-Arrays
       a = a[0];
       b = b[0];
 
       // For number sort, convert a & b to numbers.
       if ( sortType === 'number' ) {
-        a = Number( a.replace( /[^\d.-]/g, '' ) );
-        b = Number( b.replace( /[^\d.-]/g, '' ) );
+        a = Number( a.replace( regex, '' ) );
+        b = Number( b.replace( regex, '' ) );
       }
 
       if ( direction === DIRECTIONS.DOWN ) {
@@ -89,20 +124,19 @@ var TableOrganism = Organism.extend( {
 
       // Sort the values
       if ( a < b ) {
-        return sign * -1;
+        order =  sign * -1;
+      } else if ( a > b ) {
+        order = sign;
       }
-      if ( a > b ) {
-        return sign;
-      }
-      return 0;
 
+      return order;
     };
   },
 
   /**
    * Updates the table in the DOM
    */
-  updateTable: function() {
+  updateTableDom: function() {
     var documentFragment;
     var tableBody = this.ui.tableBody;
 
@@ -125,11 +159,12 @@ var TableOrganism = Organism.extend( {
     return this;
   },
 
-  sortTable: function( event ) {
+  onSort: function( event ) {
+    var sortClass;
     if( this.ui.activeSortButton ) {
         this.removeClass( this.ui.activeSortButton,
-                          this.classes.sortedUp,
-                          this.classes.sortedDown );
+                          this.classes.sortUp,
+                          this.classes.sortDown );
     }
 
     if ( this.ui.activeSortButton === event.target ) {
@@ -140,9 +175,7 @@ var TableOrganism = Organism.extend( {
       this.sortDirection = DIRECTIONS.UP;
     }
 
-    var sortClass = ( this.sortDirection === DIRECTIONS.UP ) ? this.classes.sortUp : this.classes.sortDown;
-    this.addClass( this.ui.activeSortButton, sortClass );
-    this.getTableData();
+    this.addClass( this.ui.activeSortButton, this.activeSortClass );
     this.updateTable();
 
     return this;

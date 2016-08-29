@@ -1,6 +1,8 @@
 
 var Table = require( './components/organisms/table' );
 
-Table.init();
+document.addEventListener("DOMContentLoaded", function(event) {
+  Table.init();
+});
 
 module.exports = Table;

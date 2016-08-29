@@ -1,5 +1,23 @@
 <html>
 <body>
+<style>
+
+tbody {
+
+    -webkit-animation: fadein .7s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein .7s; /* Firefox < 16 */
+        -ms-animation: fadein .7s; /* Internet Explorer */
+         -o-animation: fadein .7s; /* Opera < 12.1 */
+            animation: fadein .7s;
+    -webkit-backface-visibility: hidden;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+</style>
 
 <table class="o-table testA testB" border="true">
 <thead>
@@ -15,7 +33,7 @@
 			</button>
 		</th>
 		<th>
-			<button class="sortable">
+			<button class="sortable sort-up">
 				Column C
 			</button>
 		</th>
@@ -61,7 +79,7 @@
 	</tr>
 </tbody>
 </table>
-
+<script src="main.min.js" ></script>
 </body>
-<script src="main.min.js" async="true"></script>
+
 </html>

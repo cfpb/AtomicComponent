@@ -29,10 +29,13 @@ var PREFIXES = {
   ATOM: 'a-'
 };
 
+var NO_OP_FUNCTION = function(){};
+
 var UNDEFINED;
 
 module.exports = {
   DIRECTIONS: DIRECTIONS,
+  NO_OP_FUNCTION: NO_OP_FUNCTION,
   PREFIXES : PREFIXES,
   TYPES : TYPES,
   UNDEFINED: UNDEFINED
