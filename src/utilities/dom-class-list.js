@@ -6,26 +6,33 @@
 
    - http://stackoverflow.com/posts/18492076/revisions
    - https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+
+   TODO: Integrate with https://github.com/wilsonpage/fastdom.
    ========================================================================== */
 
 'use strict';
 
 var hasClassList = "classList" in document.createElement( '_' );
 
-function sliceArgs( args ) {
+/**
+ * Slice first element from passed arguments.
+ *
+ * @param {Arguments} args - Function arguments.
+ * @returns {Array} List of arguments.
+ */
+function _sliceArgs( args ) {
   return Array.prototype.slice.call( args, 1 );
 }
-
 
 /**
  * Add CSS class from an element.
  *
  * @param {HTMLNode} element - A DOM element.
- * @param {string} className - CSS class name.
- * @returns {HTMLNode} Nearest parent node that matches the selector.
+ * @param {string} className - CSS selector.
+ * @returns {HTMLNode} element - A DOM element.
  */
 function addClass( element, className ) {
-  var addClassNamesArray = sliceArgs( arguments );
+  var addClassNamesArray = _sliceArgs( arguments );
   if ( hasClassList ) {
     element.classList.add.apply( element.classList, addClassNamesArray );
   } else if ( !element.hasClass( className ) ) {
@@ -36,18 +43,18 @@ function addClass( element, className ) {
 }
 
 /**
- * Get the nearest parent node of an element.
+ * Determine if element has particular CSS class.
  *
  * @param {HTMLNode} element - A DOM element.
  * @param {string} className - CSS selector.
- * @returns {HTMLNode} Nearest parent node that matches the selector.
+ * @returns {Boolean} indicating if element has class.
  */
-function contains ( element, className ) {
+function contains( element, className ) {
   if ( hasClassList ) {
     return element.classList.contains( className );
-  } else {
-    return ( -1 < element.className.indexOf( className ) );
   }
+
+  return element.className.indexOf( className ) > -1;
 }
 
 /**
@@ -55,14 +62,14 @@ function contains ( element, className ) {
  *
  * @param {HTMLNode} element - A DOM element.
  * @param {string} className - CSS selector.
- * @returns {HTMLNode} Nearest parent node that matches the selector.
  */
 function removeClass( element ) {
-  var removeClassNamesArray = sliceArgs( arguments );
+  var removeClassNamesArray = _sliceArgs( arguments );
   if ( hasClassList ) {
-    element.classList.remove.apply( element.classList, removeClassNamesArray );
+    element.classList.remove
+    .apply( element.classList, removeClassNamesArray );
   } else {
-    classes = element.className.split( ' ' );
+    var classes = element.className.split( ' ' );
     removeClassNamesArray.forEach( function( className ) {
       if ( className ) {
         classes.splice( classes.indexOf( className ), 1);
@@ -76,26 +83,27 @@ function removeClass( element ) {
  * Toggle CSS class on an element.
  *
  * @param {HTMLNode} element - A DOM element.
- * @param {boolean} forceFlag - Boolean indicating whether to forcibly remove class.
- * @returns {HTMLNode} Boolean indicating wether the flag existed.
+ * @param {className} className - CSS selector.
+ * @param {boolean} forceFlag - Boolean indicating whether
+                                to forcibly remove class.
+ * @returns {hasClass} Boolean indicating wether the flag existed.
  */
 function toggleClass( element, className, forceFlag ) {
-  var toggleClassNamesArray = sliceArgs( arguments );
-  var exists = false;
+  var toggleClassNamesArray = _sliceArgs( arguments );
+  var hasClass = false;
   if ( hasClassList ) {
-     exists = element.classList.toggle.apply( element.classList, toggleClassNamesArray  );
-  } else {
-    if ( forceFlag === false || contains( element, toggleClassNamesArray) ) {
+    hasClass = element.classList.toggle
+               .apply( element.classList, toggleClassNamesArray );
+  } else if ( forceFlag === false ||
+              contains( element, toggleClassNamesArray ) ) {
       removeClass( element, forceFlag );
-    } else {
-      addClass( element, forceFlag );
-      exists = true;
-    }
+  } else {
+    addClass( element, forceFlag );
+    hasClass = true;
   }
 
-  return exists;
-};
-
+  return hasClass;
+}
 
 // Expose public methods.
 module.exports = { addClass: addClass,

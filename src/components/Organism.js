@@ -1,19 +1,19 @@
 
 /* ==========================================================================
-   Molecule
+   Organism
 
-   Molecule Atomic Component
+   Organism Atomic Component
 
    ========================================================================== */
 
 'use strict';
 
 var AtomicComponent = require( './AtomicComponent' );
-var TYPES = require( './utilities/config' ).TYPES;
+var TYPES = require( '../utilities/config' ).TYPES;
 
-var Molecule = AtomicComponent.extend( {
-  TYPE: TYPES.MOLECULE,
-  CHILD_TYPES: [TYPES.ATOM]
+var Organism = AtomicComponent.extend( {
+  TYPE: TYPES.ORGANISM,
+  CHILD_TYPES: [TYPES.MOLECULE, TYPES.ATOM]
 } );
 
-module.exports = Molecule;
+module.exports = Organism;

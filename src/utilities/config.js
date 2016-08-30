@@ -6,6 +6,7 @@
 
 'use strict';
 
+// Bit values intended to be used for bit inversion.
 var DIRECTIONS = {
   UP: 0,
   RIGHT: 1,
@@ -13,6 +14,8 @@ var DIRECTIONS = {
   LEFT: -2
 };
 
+// Atomic component types used for describing component
+// hiearchy.
 var TYPES = {
   PAGE: 1,
   TEMPLATE: 2,
@@ -21,6 +24,8 @@ var TYPES = {
   ATOM: 5
 };
 
+// Atomic Prefixes used for standardizing naming conventions
+// across HTML, CSS, and Javascript.
 var PREFIXES = {
   PAGE: 'p-',
   TEMPLATE: 't-',
@@ -29,7 +34,13 @@ var PREFIXES = {
   ATOM: 'a-'
 };
 
-var NO_OP_FUNCTION = function(){};
+/**
+ * Function used as a non-operational method that
+ * is intended to be overriden.
+ *
+ * @returns {undefined}.
+ */
+function NO_OP_FUNCTION(){ return }
 
 var UNDEFINED;
 

@@ -3,19 +3,19 @@
    Data set
    ========================================================================== */
 
-'use strict';
+   'use strict';
 
-var _assign = require('./object-assign').assign;
+   var _assign = require('./object-assign').assign;
 
 /**
  * Converts a string from selector-case to camelCase.
  * @param {string} str - The string in selector-case form.
  * @returns {string} The string in camelCase form.
  */
-function _toCamelCase(str) {
-    return str.replace(/\-([a-z])/g, function(all, match) {
-        return match.toUpperCase();
-    });
+function _toCamelCase( str ) {
+  return str.replace( /\-([a-z])/g, function( all, match ) {
+    return match.toUpperCase();
+  } );
 }
 
 /**
@@ -25,24 +25,24 @@ function _toCamelCase(str) {
  * @param {HTMLElement} element - The element to check for dataset support.
  * @returns {Object} The data set.
  */
-function dataSet(element) {
-    if (document.documentElement.dataset) {
-        return _assign({}, element.dataset);
-    }
+ function dataSet( element ) {
+  if ( document.documentElement.dataset ) {
+    return _assign( {}, element.dataset );
+  }
+  var dataset = {};
+  var regex = /^data-(.+)/;
+  var attr;
+  var match;
 
-    var dataset = {};
-    var regex = /^data-(.+)/;
-    var attr;
-    var match;
-    for (var i = 0; i < element.attributes.length; i++) {
-        attr = element.attributes[i];
-        match = attr.name.match(regex);
-        if (match) {
-            dataset[_toCamelCase(match[1])] = attr.value;
-        }
+  for ( var i = 0; i < element.attributes.length; i++ ) {
+    attr = element.attributes[i];
+    match = attr.name.match( regex );
+    if ( match ) {
+      dataset[ _toCamelCase( match[1] ) ] = attr.value;
     }
+  }
 
-    return dataset;
+  return dataset;
 }
 
 // Expose public methods.

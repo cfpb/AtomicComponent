@@ -1,17 +1,19 @@
 
 /* ==========================================================================
-   Page
+   Molecule
 
-   Page Atomic Component
+   Molecule Atomic Component
 
    ========================================================================== */
 
-var AtomicComponent = require( './AtomicComponent' );
-var TYPES = require( './utilities/config' ).TYPES;
+'use strict';
 
-Page = AtomicComponent.extend( {
-  TYPE: TYPES.TEMPLATE,
-  CHILD_TYPES: [TYPES.ORGANISM, TYPES.PAGES, TYPES.MOLECULE, TYPES.ATOM]
+var AtomicComponent = require( './AtomicComponent' );
+var TYPES = require( '../utilities/config' ).TYPES;
+
+var Template = AtomicComponent.extend( {
+  TYPE: TYPES.Template,
+  CHILD_TYPES: [TYPES.PAGE, TYPES.ORGANISM, TYPES.MOLECULE, TYPES.ATOM]
 } );
 
 module.exports = Template;
