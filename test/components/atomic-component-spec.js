@@ -6,10 +6,13 @@ var expect = chai.expect;
 var jsdom = require( 'mocha-jsdom' );
 
 beforeEach( function() {
-	jsdom();
-	var domClassList = require( BASE_JS_PATH + '/utilities/dom-class-list' );
+	jsdom({
+	   	done: function(errors, window) {
+	    	var atomicComponent = require( BASE_JS_PATH + '/components/AtomicComponent' );
+	    }
+  	} );
 } )
 
-describe( 'dom-class-list', function() {
+describe( 'AtomicComponent', function() {
   // TODO: Implement tests.
 } );

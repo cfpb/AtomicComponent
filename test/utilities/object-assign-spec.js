@@ -1,10 +1,10 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../../cfgov/unprocessed/js/';
-
+var BASE_JS_PATH = '../../src';
 var chai = require( 'chai' );
 var expect = chai.expect;
-var assign = require( BASE_JS_PATH + 'modules/util/assign.js' ).assign;
+var assign = require( BASE_JS_PATH + '/utilities/object-assign' ).assign;
+var jsdom = require( 'mocha-jsdom' );
 var testObjectA;
 var testObjectB;
 var testObjectC;

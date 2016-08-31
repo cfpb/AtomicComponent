@@ -1,7 +1,7 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../../cfgov/unprocessed/js/';
-var dataSet = require( BASE_JS_PATH + 'modules/utilities/data-set' ).dataSet;
+var BASE_JS_PATH = '../../src';
+var dataSet = require( BASE_JS_PATH + '/utilities/data-set' ).dataSet;
 
 var chai = require( 'chai' );
 var expect = chai.expect;

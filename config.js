@@ -16,8 +16,9 @@ module.exports = {
     test: [ TEST + '/**/*.js'],
     build: ['gulpfile.js', 'gulp/**/*.js']
   },
-  test: {
-    src: TEST
+  tests: {
+    src: SRC + '/**/*.js',
+    test: TEST
   },
   clean: {
     dest: BUILD
