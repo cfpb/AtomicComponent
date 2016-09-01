@@ -19,6 +19,8 @@ function unitTest(cb) {
   }))
   .pipe(plugins.istanbul.hookRequire())
   .on('finish', function() {
+    gulp.src( configTest.test + '/unit_test_coverage/**/' )
+   .pipe(plugins.clean({force: true, read: false}))
     gulp.src(configTest.test + '/**/*.js')
     .pipe(plugins.mocha({
       reporter: 'nyan'
@@ -28,6 +30,7 @@ function unitTest(cb) {
     }))
     .on('end', cb);
   });
+
 }
 
 gulp.task( 'test', unitTest );
