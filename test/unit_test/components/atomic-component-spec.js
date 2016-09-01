@@ -12,9 +12,9 @@ var Element;
 
 var HTML_SNIPPET =
 '<div id="test-block-a" class="test-class test-class-a">' +
-'<div id="test-block-b" class="test-class-b" >' +
-'<div id="test-block-c" class="test-class-c"></div>' +
-'</div>' +
+  '<div id="test-block-b" class="test-class-b" >' +
+    '<div id="test-block-c" class="test-class-c"></div>' +
+' </div>' +
 '</div>';
 
 
@@ -44,7 +44,7 @@ describe( 'AtomicComponent', function() {
       var atomicComponent = new AtomicComponent();
       expect( atomicComponent.element.tagName === 'DIV' ).to.equal( true );
       var element = document.createElement( 'span' );
-      atomicComponent = new AtomicComponent( element);
+      atomicComponent = new AtomicComponent( element );
       expect( atomicComponent.element.tagName === 'SPAN' ).to.equal( true );
       atomicComponent = new AtomicComponent('', {id: 'test_id',
         className: 'test_class_name' } );

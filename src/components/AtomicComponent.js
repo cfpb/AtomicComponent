@@ -30,7 +30,6 @@ var Events = require('../mixins/Events');
 function AtomicComponent( element, attributes ) {
   this.uId = this._uniqueId( 'ac' );
   this.element = element;
-  this.events = {};
   assign( this, ( attributes || {} ) );
   this.ensureElement();
   this.setCachedElements();

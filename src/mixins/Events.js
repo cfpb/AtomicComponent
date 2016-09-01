@@ -7,6 +7,7 @@
 
 'use strict';
 
+
 var Events = {
 
   /**
@@ -17,8 +18,9 @@ var Events = {
    * @returns {object} An instance.
    */
   on: function( eventName, callback ) {
-    this.events[eventName] = this.events[eventName] || [];
-    this.events[eventName].push( callback );
+    var events = this.events = this.events || {};
+    events[eventName] = this.events[eventName] || [];
+    events[eventName].push( callback );
 
     return this;
   },
@@ -30,7 +32,7 @@ var Events = {
    * @returns {object} An instance.
    */
   off: function( eventName ) {
-    if ( this.events[eventName] ) delete this.events[eventName];
+    if ( this.events && this.events[eventName] ) delete this.events[eventName];
 
     return this;
   },
@@ -42,8 +44,9 @@ var Events = {
    * @returns {object} An instance.
    */
   trigger: function( eventName ) {
-    this.events[eventName] = this.events[eventName] || [];
-    for ( var i = 0, len = this.events[eventName].length; i < len; i++ ) {
+    var events = this.events = this.events || {};
+    events[eventName] = events[eventName] || [];
+    for ( var i = 0, len = events[eventName].length; i < len; i++ ) {
       this.events[eventName][i].apply( this, arguments );
     }
 
