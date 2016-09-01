@@ -23,9 +23,19 @@ gulp.task( 'lint:scripts', function() {
 } );
 
 /**
+ * Lints the test js files for errors
+ */
+gulp.task( 'lint:test', function() {
+  return gulp.src( config.test )
+    .pipe( plugins.eslint({fix:true}) )
+    .pipe( plugins.eslint.format() )
+} );
+
+/**
  * Lints all the js files for errors
  */
 gulp.task( 'lint', [
   'lint:build',
-  'lint:scripts'
+  'lint:scripts',
+  'lint:test'
 ] );

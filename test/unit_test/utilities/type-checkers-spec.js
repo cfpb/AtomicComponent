@@ -1,6 +1,6 @@
 'use strict';
 
-var BASE_JS_PATH = '../../src';
+var BASE_JS_PATH = '../../../src';
 var chai = require( 'chai' );
 var expect = chai.expect;
 var typeCheckers = require( BASE_JS_PATH + '/utilities/type-checkers.js' );

@@ -16,7 +16,7 @@ function closest( element, selector ) {
   if ( 'closest' in element ) {
     return element.closest( selector );
   }
-  element = element.parentNode;
+
   var matchesSelector = element.matches ||
                         element.webkitMatchesSelector ||
                         element.mozMatchesSelector ||

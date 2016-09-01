@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var gulpRename = require('gulp-rename');
 var gulpUglify = require('gulp-uglify');
 var webpackStream = require('webpack-stream');
+var config = require( '../config' );
 
 
 /**
@@ -19,7 +20,7 @@ function scripts() {
     }))
     .pipe(gulpUglify())
     .pipe(gulpRename('main.min.js'))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest( config.BUILD ))
 }
 
 gulp.task( 'scripts', scripts );

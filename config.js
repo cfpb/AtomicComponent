@@ -13,7 +13,7 @@ module.exports = {
   TEST: TEST,
   lint: {
     src: [ SRC + '/**/*.js'],
-    test: [ TEST + '/**/*.js'],
+    test: [ TEST + '/unit_test/**/*.js'],
     build: ['gulpfile.js', 'gulp/**/*.js']
   },
   tests: {

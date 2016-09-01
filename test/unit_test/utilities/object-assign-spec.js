@@ -1,6 +1,6 @@
 'use strict';
 
-var BASE_JS_PATH = '../../src';
+var BASE_JS_PATH = '../../../src';
 var chai = require( 'chai' );
 var expect = chai.expect;
 var assign = require( BASE_JS_PATH + '/utilities/object-assign' ).assign;
@@ -34,7 +34,6 @@ beforeEach( function() {
 } );
 
 describe( 'Assign', function() {
-
   it( 'should assign properties from source to destination', function() {
     assign( testObjectA, testObjectB );
 
@@ -76,5 +75,4 @@ describe( 'Assign', function() {
     expect( testObjectA.func() === 'testStr' ).to.be.true;
     expect( testObjectA.num === 4 ).to.be.true;
   } );
-
 } );

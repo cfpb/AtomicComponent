@@ -4,7 +4,6 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var configTest = require('../config').tests;
-var jsdom = require( 'mocha-jsdom' );
 
 /**
 * Run Mocha JavaScript unit tests.
@@ -12,16 +11,13 @@ var jsdom = require( 'mocha-jsdom' );
 */
 
 function unitTest(cb) {
-
   gulp.src(configTest.src)
   .pipe(plugins.istanbul({
-    includeUntested: false
+    includeUntested: true
   }))
   .pipe(plugins.istanbul.hookRequire())
   .on('finish', function() {
-    gulp.src( configTest.test + '/unit_test_coverage/**/' )
-   .pipe(plugins.clean({force: true, read: false}))
-    gulp.src(configTest.test + '/**/*.js')
+    gulp.src( configTest.test + '/unit_test/**/*.js' )
     .pipe(plugins.mocha({
       reporter: 'nyan'
     }))
@@ -30,7 +26,6 @@ function unitTest(cb) {
     }))
     .on('end', cb);
   });
-
 }
 
 gulp.task( 'test', unitTest );

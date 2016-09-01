@@ -16,7 +16,6 @@
 var assign = require('../utilities/object-assign').assign;
 var isFunction = require('../utilities/type-checkers').isFunction;
 var classList = require('../utilities/dom-class-list');
-var dataSet = require('../utilities/data-set').dataSet;
 var Delegate = require('dom-delegate').Delegate;
 var Events = require('../mixins/Events');
 
@@ -31,7 +30,8 @@ var Events = require('../mixins/Events');
 function AtomicComponent( element, attributes ) {
   this.uId = this._uniqueId( 'ac' );
   this.element = element;
-  assign( this, dataSet( element ), ( attributes || {} ) );
+  this.events = {};
+  assign( this, ( attributes || {} ) );
   this.ensureElement();
   this.setCachedElements();
   this.initialize.apply( this, arguments );
@@ -66,7 +66,7 @@ assign(AtomicComponent.prototype, Events, classList, {
   ensureElement: function() {
     if ( !this.element ) { // eslint-disable-line no-negated-condition, inline-comments, max-len
       var attrs = assign( {}, this.attributes );
-      if ( this.id ) attrs.id = this.id || this.u_id;
+      attrs.id = this.id || this.u_id;
       if ( this.className ) attrs['class'] = this.className;
       this.setElement( document.createElement( this.tagName ) );
       this.setElementAttributes( attrs );
@@ -83,7 +83,9 @@ assign(AtomicComponent.prototype, Events, classList, {
    * @returns {AtomicComponent} An instance.
    */
   setElement: function( element ) {
-    this.undelegateEvents();
+    if ( this.element ) {
+      this.undelegateEvents();
+    }
     this.element = element;
     this.delegateEvents();
 

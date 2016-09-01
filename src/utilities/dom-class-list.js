@@ -35,8 +35,14 @@ function addClass( element, className ) {
   var addClassNamesArray = _sliceArgs( arguments );
   if ( hasClassList ) {
     element.classList.add.apply( element.classList, addClassNamesArray );
-  } else if ( !element.hasClass( className ) ) {
-    element.className += addClassNamesArray.join( ' ' );
+  } else {
+    var classes = element.className.split( ' ' );
+    addClassNamesArray.forEach( function( name ) {
+      if ( classes.indexOf( name ) ===-1 ) {
+        classes.push( name );
+      }
+    } );
+    element.className = classes.join( ' ' );
   }
 
   return element;
@@ -96,9 +102,9 @@ function toggleClass( element, className, forceFlag ) {
                .apply( element.classList, toggleClassNamesArray );
   } else if ( forceFlag === false ||
               contains( element, toggleClassNamesArray ) ) {
-      removeClass( element, forceFlag );
+    removeClass( element, forceFlag );
   } else {
-    addClass( element, forceFlag );
+    addClass( element, className );
     hasClass = true;
   }
 
