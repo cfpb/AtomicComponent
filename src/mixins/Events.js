@@ -11,10 +11,10 @@
 var Events = {
 
   /**
-   * Function used to create a non-operational method that
+   * Function used to add events to an event stack.
    *
-   * @param {string} eventName - The name of the event to listen for.
-   * @param {Function} callback - The element to set as the base element.
+   * @param {string} eventName - The name of the event to add to the event stack.
+   * @param {Function} callback - Function to callback when event is triggered.
    * @returns {object} An instance.
    */
   on: function( eventName, callback ) {
@@ -26,9 +26,9 @@ var Events = {
   },
 
   /**
-   * Function used to remove events from referenced object.
+   * Function used to remove events from an event stack.
    *
-   * @param {string} eventName - The name of the event to listen for.
+   * @param {string} eventName - The name of the event to remove from the event stack.
    * @returns {object} An instance.
    */
   off: function( eventName ) {
@@ -38,9 +38,9 @@ var Events = {
   },
 
   /**
-   * Function used to trigger events on referenced object.
+   * Function used to trigger events that exist on the event stack.
    *
-   * @param {string} eventName - The name of the event to listen for.
+   * @param {string} eventName - The name of the event to trigger.
    * @returns {object} An instance.
    */
   trigger: function( eventName ) {
