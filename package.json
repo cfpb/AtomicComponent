@@ -4,18 +4,26 @@
   "description": "Basic Atomic Component",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Run gulp test\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebworks/AtomicComponent.git"
+    "url": "git+https://github.com/cfpb/AtomicComponent.git"
   },
-  "author": "Steven Bellamy",
-  "license": "ISC",
+  "author": {
+    "name": "Consumer Financial Protection Bureau",
+    "email": "tech@cfpb.gov",
+    "url": "https://consumerfinance.gov"
+  },
+  "license": "CC0-1.0",
+  "keywords": [
+    "capital-framework",
+    "Atomic Design"
+  ],
   "bugs": {
-    "url": "https://github.com/sebworks/AtomicComponent/issues"
+    "url": "https://github.com/cfpb/AtomicComponent/issues"
   },
-  "homepage": "https://github.com/sebworks/AtomicComponent#readme",
+  "homepage": "https://github.com/cfpb/AtomicComponent#readme",
   "devDependencies": {
     "browser-sync": "^2.14.0",
     "chai": "^3.5.0",

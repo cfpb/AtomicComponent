@@ -2,10 +2,11 @@
    Javascript Type Checkers
 
    Various utility functions to check Javascript types and primitives.
-   Copied from:
-   https://github.com/angular/angular.js/blob/master/src/Angular.js.
+   Copied from with moderate modifications:
 
+   https://github.com/angular/angular.js/blob/master/src/Angular.js.
    Copyright (c) 2010-2015 Google, Inc. http://angularjs.org
+
    ========================================================================== */
 
 'use strict';

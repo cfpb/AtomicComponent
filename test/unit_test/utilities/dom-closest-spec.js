@@ -16,11 +16,11 @@ var testBlockD;
 
 var HTML_SNIPPET =
 '<section id="test-block-a">' +
-'<div id="test-block-b">' +
-'<div id="test-block-c" >' +
-'<div id="test-block-d"></div>' +
-'</div>' +
-'</div>' +
+  '<div id="test-block-b">' +
+    '<div id="test-block-c" >' +
+      '<div id="test-block-d"></div>' +
+    '</div>' +
+  '</div>' +
 '</section>';
 
 describe( 'dom-closest', function() {

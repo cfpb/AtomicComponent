@@ -17,9 +17,9 @@ var sandbox;
 
 var HTML_SNIPPET =
 '<div id="test-block-a" class="test-class test-class-a">' +
-'<div id="test-block-b" class="test-class-b" >' +
-'<div id="test-block-c" class="test-class-c"></div>' +
-'</div>' +
+  '<div id="test-block-b" class="test-class-b" >' +
+    '<div id="test-block-c" class="test-class-c"></div>' +
+  '</div>' +
 '</div>';
 
 beforeEach( function() {
