@@ -47,4 +47,5 @@ author or the affirmer.
 This project makes use of:
 
 Backbone.js by Jeremy Ashkenas, licensed under the MIT license.
+
 Atomic Design by Brad Frost, Copyright (c) 2015, All Rights Reserved Brad Frost http://bradfrost.com

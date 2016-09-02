@@ -62,7 +62,7 @@ In addition to gulp watch, there are a number of other important gulp tasks, par
 ```
 gulp build           # Concatenate, optimize, and copy source files to the /build/ directory.
 gulp lint            # Lint the scripts and build files.
-gulp test            # Run linting, unit and acceptance tests (see below).
+gulp test            # Run unit tests.
 ```
 
 ## Contributing
