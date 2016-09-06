@@ -19,6 +19,7 @@ var classList = require('../utilities/dom-class-list');
 var Delegate = require('dom-delegate').Delegate;
 var Events = require('../mixins/Events');
 
+
 /**
  * Function as the constrcutor for the AtomicComponent.
  * Sets up initial instance properties and calls
@@ -28,12 +29,14 @@ var Events = require('../mixins/Events');
  * @param {Object} attributes -  Hash of attributes to set on base element.
  */
 function AtomicComponent( element, attributes ) {
-  this.uId = this._uniqueId( 'ac' );
+  this.uId = this.uniqueId( 'ac' );
   this.element = element;
   assign( this, ( attributes || {} ) );
   this.ensureElement();
   this.setCachedElements();
-  this.initialize.apply( this, arguments );
+  this.initialize.forEach( function( func ) {
+    func.apply( this, arguments );
+  }, this );
   this.trigger( 'component:initialized' );
 }
 
@@ -48,7 +51,7 @@ assign(AtomicComponent.prototype, Events, classList, {
    *
    * @returns {undefined}.
    */
-  initialize: function (){ return },
+  initialize: [function (){ return }],
 
   /**
    * Function used to render a template in Single Page Applications.
@@ -213,13 +216,14 @@ assign(AtomicComponent.prototype, Events, classList, {
    * @param {Object} prefix - String to use a prefix.
    * @returns {string} Prefixed unique id string.
    */
-  _uniqueId: function( prefix ) {
+  uniqueId: function( prefix ) {
     return prefix + '_' + Math.random().toString(36).substr(2, 9);
   }
 
 } );
 
 // Static Methods
+
 
 /**
  * Function used to set the attributes on an element.
@@ -239,18 +243,46 @@ AtomicComponent.extend = function extend( attributes ) {
     this._super = AtomicComponent.prototype;
     return AtomicComponent.apply( this, arguments );
   }
+
   child.prototype = Object.create( AtomicComponent.prototype );
   assign(child.prototype, attributes);
   assign(child, AtomicComponent);
 
-  if ( attributes.hasOwnProperty( 'classes' ) &&
-       attributes.classes.hasOwnProperty( 'baseElement' ) ) {
-    child.selector = attributes.classes.baseElement;
+  if ( attributes.hasOwnProperty( 'modifiers' ) ) {
+    _processModifiers( attributes, child.prototype );
   }
+
+  if ( attributes.hasOwnProperty( 'ui' ) &&
+       attributes.ui.hasOwnProperty( 'base' ) ) {
+    child.selector = attributes.ui.base;
+  }
+
   child.constants = {};
 
   return child;
 };
+
+/**
+ * Function used to process class modifiers. These should
+ * correspond with BEM modifiers.
+ *
+ * @param {Object} attributes -  Hash of attributes to set on base element.
+ * @param {Object} atomicComponent -  Base component.
+ */
+function _processModifiers( attributes, atomicComponent ) {
+  attributes.modifiers.forEach( function( modifier ) {
+    if ( modifier.initialize ) {
+      atomicComponent.initialize.push( modifier.initialize );
+      delete modifier.initialize;
+    }
+
+    if ( modifier.ui && modifier.ui.base ) {
+      atomicComponent.ui.base += ', ' + modifier.ui.base
+      delete modifier.ui.base;
+    }
+    assign( atomicComponent, modifier );
+  } );
+}
 
 /**
  * Function used to instantiate all instances of the particular
@@ -261,16 +293,16 @@ AtomicComponent.extend = function extend( attributes ) {
 AtomicComponent.init = function init() {
   var elements = document.querySelectorAll( this.selector );
   var element;
-  var views = [];
+  var components = [];
 
   for ( var i = 0; i < elements.length; ++i ) {
     element = elements[i];
     if( element.hasAttribute( 'data-bound' ) === false ) {
-      views.push( new this( element ) );
+      components.push( new this( element ) );
     }
   }
 
-  return views;
+  return components;
 };
 
 module.exports = AtomicComponent;

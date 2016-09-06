@@ -1,9 +1,9 @@
 
 'use strict';
 
-var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')();
-var configTest = require('../config').tests;
+var gulp = require( 'gulp' );
+var plugins = require( 'gulp-load-plugins' )();
+var configTest = require( '../config' ).tests;
 
 /**
 * Run Mocha JavaScript unit tests.
@@ -11,21 +11,21 @@ var configTest = require('../config').tests;
 */
 
 function unitTest(cb) {
-  gulp.src(configTest.src)
-  .pipe(plugins.istanbul({
+  gulp.src( configTest.src )
+  .pipe(plugins.istanbul( {
     includeUntested: true
-  }))
-  .pipe(plugins.istanbul.hookRequire())
-  .on('finish', function() {
-    gulp.src( configTest.test + '/unit_test/**/*.js' )
-    .pipe(plugins.mocha({
+  } ) )
+  .pipe( plugins.istanbul.hookRequire() )
+  .on( 'finish', function() {
+    gulp.src( configTest.test + '/unit-test/**/*.js' )
+    .pipe( plugins.mocha( {
       reporter: 'nyan'
-    }))
-    .pipe(plugins.istanbul.writeReports({
-      dir: configTest.test + '/unit_test_coverage'
-    }))
-    .on('end', cb);
-  });
+    } ) )
+    .pipe( plugins.istanbul.writeReports( {
+      dir: configTest.test + '/unit-test-coverage'
+    } ) )
+    .on( 'end', cb );
+  } );
 }
 
 gulp.task( 'test', unitTest );

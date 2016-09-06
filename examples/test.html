@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>cf-tables</title>
+  <link rel="stylesheet" href="./tables.css">
+</head>
+<body>
+
+<h3 id="sample-sortable-table">Sample Sortable Table</h3>
+<table class="o-table o-table__sortable o-table__row-links">
+  <thead>
+      <tr>
+          <th>
+              Agency
+          </th>
+          <th>
+            <button class="sortable">
+              Languages
+            </button>
+          </th>
+          <th>
+            <button class="sortable sort-up" data-sort_type="number">
+              Distance
+            </button>
+          </th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>
+              Alpha
+          </td>
+          <td data-label="Languages">
+              English
+          </td>
+          <td data-label="Distance">
+              2.6 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Beta
+          </td>
+          <td data-label="Languages">
+              English, Spanish
+          </td>
+          <td data-label="Distance">
+              1.4 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Gamma
+          </td>
+          <td data-label="Languages">
+              English, French, Spanish
+          </td>
+          <td data-label="Distance">
+              1.4 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Delta
+          </td>
+          <td data-label="Languages">
+              English, Spanish
+          </td>
+          <td data-label="Distance">
+              3.2 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Epsilon
+          </td>
+          <td data-label="Languages">
+              English
+          </td>
+          <td data-label="Distance">
+              1.6 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+            Zeta
+          </td>
+          <td data-label="Languages">
+            English, Spanish
+          </td>
+          <td data-label="Distance">
+            1.2 mi
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Eta
+          </td>
+          <td data-label="Languages">
+              English
+          </td>
+          <td data-label="Distance">
+              11.1 mi
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+<script src="../build/example.min.js"></script>
+</body>
+</html>
