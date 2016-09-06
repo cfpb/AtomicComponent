@@ -16,8 +16,8 @@ var UNDEFINED = config.UNDEFINED;
 var TableSortable = {
 
   classes: {
-    sortDown:    'sort-down',
-    sortUp:      'sort-up'
+    sortDown:    'sorted-down',
+    sortUp:      'sorted-up'
   },
 
   events: {
@@ -27,7 +27,7 @@ var TableSortable = {
   ui: {
   	base:       '.o-table__sortable',
     tableBody:  'tbody',
-    sortButton: '.sort-up, .sort-down'
+    sortButton: '.sorted-up, .sorted-down'
   },
 
   /**

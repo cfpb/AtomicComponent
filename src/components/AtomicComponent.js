@@ -14,10 +14,11 @@
 'use strict';
 
 var assign = require('../utilities/object-assign').assign;
-var isFunction = require('../utilities/type-checkers').isFunction;
+var bind = require('../utilities/function-bind').bind;
 var classList = require('../utilities/dom-class-list');
 var Delegate = require('dom-delegate').Delegate;
 var Events = require('../mixins/Events');
+var isFunction = require('../utilities/type-checkers').isFunction;
 
 
 /**
@@ -41,7 +42,7 @@ function AtomicComponent( element, attributes ) {
 }
 
 // Public instance Methods and properties.
-assign(AtomicComponent.prototype, Events, classList, {
+assign( AtomicComponent.prototype, Events, classList, {
 
   tagName: 'div',
 
@@ -175,7 +176,7 @@ assign(AtomicComponent.prototype, Events, classList, {
       if ( isFunction( this[method] ) ) method = this[method];
       if ( !method ) continue;
       match = key.match( delegateEventSplitter );
-      this.delegate( match[1], match[2], method.bind( this ) );
+      this.delegate( match[1], match[2], bind( method, this ) );
     }
     this.trigger( 'component:bound' );
 
@@ -275,7 +276,6 @@ function _processModifiers( attributes, atomicComponent ) {
       atomicComponent.initialize.push( modifier.initialize );
       delete modifier.initialize;
     }
-
     if ( modifier.ui && modifier.ui.base ) {
       atomicComponent.ui.base += ', ' + modifier.ui.base
       delete modifier.ui.base;

@@ -99,7 +99,7 @@ ansible/roles/*
 
 # Unit test / coverage reports
 #################
-test/unit_test_coverage/
+test/unit-test-coverage/
 test/perf_test_results/
 test/screenshot.png
 htmlcov/
