@@ -33,6 +33,7 @@ function AtomicComponent( element, attributes ) {
   this.uId = this.uniqueId( 'ac' );
   this.element = element;
   assign( this, ( attributes || {} ) );
+  this.processModifiers();
   this.ensureElement();
   this.setCachedElements();
   this.initialize.forEach( function( func ) {
@@ -53,6 +54,29 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @returns {undefined}.
    */
   initialize: [function (){ return }],
+
+  /**
+   * Function used to process class modifiers. These should
+   * correspond with BEM modifiers.
+   *
+   * @param {Object} attributes -  Hash of attributes to set on base element.
+   * @param {Object} atomicComponent -  Base component.
+   */
+  processModifiers: function() {
+    if ( !this.modifiers ) {
+      return;
+    }
+
+    this.modifiers.forEach( function( modifier ) {
+      if ( classList.contains( this.element, modifier.ui.base ) ) {
+        if ( modifier.initialize ) {
+          this.initialize.push( modifier.initialize );
+          delete modifier.initialize;
+        }
+        assign( this, modifier );
+      }
+    }, this );
+  },
 
   /**
    * Function used to render a template in Single Page Applications.
@@ -249,12 +273,8 @@ AtomicComponent.extend = function extend( attributes ) {
   assign(child.prototype, attributes);
   assign(child, AtomicComponent);
 
-  if ( attributes.hasOwnProperty( 'modifiers' ) ) {
-    _processModifiers( attributes, child.prototype );
-  }
-
   if ( attributes.hasOwnProperty( 'ui' ) &&
-       attributes.ui.hasOwnProperty( 'base' ) ) {
+  attributes.ui.hasOwnProperty( 'base' ) ) {
     child.selector = attributes.ui.base;
   }
 
@@ -263,26 +283,6 @@ AtomicComponent.extend = function extend( attributes ) {
   return child;
 };
 
-/**
- * Function used to process class modifiers. These should
- * correspond with BEM modifiers.
- *
- * @param {Object} attributes -  Hash of attributes to set on base element.
- * @param {Object} atomicComponent -  Base component.
- */
-function _processModifiers( attributes, atomicComponent ) {
-  attributes.modifiers.forEach( function( modifier ) {
-    if ( modifier.initialize ) {
-      atomicComponent.initialize.push( modifier.initialize );
-      delete modifier.initialize;
-    }
-    if ( modifier.ui && modifier.ui.base ) {
-      atomicComponent.ui.base += ', ' + modifier.ui.base
-      delete modifier.ui.base;
-    }
-    assign( atomicComponent, modifier );
-  } );
-}
 
 /**
  * Function used to instantiate all instances of the particular

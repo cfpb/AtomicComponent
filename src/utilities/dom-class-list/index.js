@@ -57,6 +57,7 @@ function addClass( element ) {
  * @returns {Boolean} indicating if element has class.
  */
 function contains( element, className ) {
+  className = className.replace( '.', '' );
   if ( hasClassList ) {
     return element.classList.contains( className );
   }

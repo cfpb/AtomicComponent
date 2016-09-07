@@ -16,8 +16,8 @@ var UNDEFINED = config.UNDEFINED;
 var TableSortable = {
 
   classes: {
-    sortDown:    'sorted-down',
-    sortUp:      'sorted-up'
+    sortDown: 'sorted-down',
+    sortUp:   'sorted-up'
   },
 
   events: {

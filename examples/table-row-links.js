@@ -8,6 +8,8 @@
 
 'use strict';
 
+var closest = require( '../src/utilities/dom-closest' ).closest;
+
 var TableRowLinks = {
 
   events: {
@@ -25,10 +27,29 @@ var TableRowLinks = {
    */
   onRowLinkClick: function onRowLinkClick( event ) {
     var target = event.target;
-    var link = target && target.querySelector( 'a' );
+    if( target && target.tagName === 'A' ) {
+      return
+    }
+    target = closest( event.target, 'tr' );
+    var link = target.querySelector( 'a' );
     if( link ) window.location = link.getAttribute( 'href' );
-  }
+  },
 
+  /**
+   * Handle initilization of Table Row Links. Added for standalone
+   * use cases.
+   *
+   * @param {Object} event Mouse event for click on the table.
+   */
+  init: function() {
+    var elements = document.querySelector( TableRowLinks.ui.base );
+    for ( var i = 0; i < elements.length; ++i ) {
+      if( elements[i].hasAttribute( 'data-bound' ) === false ) {
+      elements[i].addEventListener( 'click', table,
+        TableRowLinks.onRowLinkClick );
+      }
+    }
+  }
 };
 
 module.exports = TableRowLinks;
