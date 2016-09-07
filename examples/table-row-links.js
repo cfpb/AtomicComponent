@@ -25,7 +25,7 @@ var TableRowLinks = {
    *
    * @param {Object} event Mouse event for click on the table.
    */
-  onRowLinkClick: function onRowLinkClick( event ) {
+  onRowLinkClick: function( event ) {
     var target = event.target;
     if( target && target.tagName === 'A' ) {
       return
@@ -39,7 +39,6 @@ var TableRowLinks = {
    * Handle initilization of Table Row Links. Added for standalone
    * use cases.
    *
-   * @param {Object} event Mouse event for click on the table.
    */
   init: function() {
     var elements = document.querySelector( TableRowLinks.ui.base );

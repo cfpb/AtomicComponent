@@ -30,14 +30,15 @@ var isFunction = require('../utilities/type-checkers').isFunction;
  * @param {Object} attributes -  Hash of attributes to set on base element.
  */
 function AtomicComponent( element, attributes ) {
-  this.uId = this.uniqueId( 'ac' );
   this.element = element;
-  assign( this, ( attributes || {} ) );
+  this.initialize = [];
+  this.uId = this.uniqueId( 'ac' );
+  assign( this, attributes );
   this.processModifiers();
   this.ensureElement();
   this.setCachedElements();
   this.initialize.forEach( function( func ) {
-    func.apply( this, arguments );
+    isFunction( func ) && func.apply( this, arguments );
   }, this );
   this.trigger( 'component:initialized' );
 }
@@ -46,14 +47,6 @@ function AtomicComponent( element, attributes ) {
 assign( AtomicComponent.prototype, Events, classList, {
 
   tagName: 'div',
-
-  /**
-   * Function used as a non-operational method that
-   * is intended to be overriden.
-   *
-   * @returns {undefined}.
-   */
-  initialize: [function (){ return }],
 
   /**
    * Function used to process class modifiers. These should
@@ -257,7 +250,7 @@ assign( AtomicComponent.prototype, Events, classList, {
  * @param {Object} attributes -  Hash of attributes to set on base element.
  * @returns {Function} Extended child constructor function.
  */
-AtomicComponent.extend = function extend( attributes ) {
+AtomicComponent.extend = function( attributes ) {
 
  /**
  * Function used as constructor in order to establish inheritance
@@ -290,7 +283,7 @@ AtomicComponent.extend = function extend( attributes ) {
  *
  * @returns {Array} List of AtomicComponent instances.
  */
-AtomicComponent.init = function init() {
+AtomicComponent.init = function() {
   var elements = document.querySelectorAll( this.selector );
   var element;
   var components = [];
