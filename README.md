@@ -36,11 +36,11 @@ Molecules are prefixed with “m-” in CSS, Javascript, and HTML files.
 
   var NotificationMolecule = Molecule.extend( {
         classes: {
-          baseElement: '.m-notification',
           isVisible:    'm-notification__visible'
         },
 
         ui: {
+          base:        '.m-notification',
           explanation: 'm-notification_explanation',
           message:     'm-notification_message'
         },
