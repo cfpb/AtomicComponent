@@ -1,7 +1,7 @@
 {
-  "name": "data-set",
+  "name": "element-data-set",
   "version": "1.0.0",
-  "description": "Utility for retrieving HTMLElement.dataset.",
+  "description": "Utility for retrieving HTMLElement.dataset as a JSON object",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Run gulp test\" && exit 1"
