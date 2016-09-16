@@ -1,5 +1,5 @@
 {
-  "name": "dom-closest",
+  "name": "@cfpb/dom-closest",
   "version": "1.0.0",
   "description": "Utility for finding the closest parent of the current element (or the current element itself) which matches the selector.",
   "main": "index.js",

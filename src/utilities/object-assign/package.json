@@ -1,5 +1,5 @@
 {
-  "name": "object-assign",
+  "name": "@cfpb/object-assign",
   "version": "1.0.0",
   "description": "Utility used to copy Javascript object properties from one or more source objects to a target object",
   "main": "index.js",

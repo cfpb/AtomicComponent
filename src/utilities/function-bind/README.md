@@ -7,7 +7,7 @@ Utility used to create a new function which is bound to a particular context.
 ### JS
 
 ```
-var bind = require( 'function-bind' );
+var bind = require( '@cfpb/function-bind' );
 var assert = require( 'assert' );
 var context = { testing: true };
 var mockFunction = function(){ return this };

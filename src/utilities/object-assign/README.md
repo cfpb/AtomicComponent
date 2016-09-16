@@ -1,29 +1,34 @@
-# element-data-set
+# object-assign
 
-Utility for retrieving HTMLElement.dataset as a JSON object
+Utility used to copy Javascript object properties from one or more source objects to a target object
 
 ## Example
 
-
-### HTML
-
-```
-<div id='element' data-foo="bar"></div>
-```
 
 ### JS
 
 ```
 var assert = require( 'assert' );
-var dataSet = require( 'element-data-set' ).dataSet;
-var element = document.querySelector( '#element' );
-var data = dataSet( element );
-assert.equal( data.foo, 'bar' );
+var assign = require( 'object-assign' ).assign;
+var testObjectA = {
+    str:  'test',
+    func: function() { return 'testStr'; },
+    num:  1
+ };
+ var testObjectB = {
+    obj:   { test: 2 },
+    arr:   [ 3 ],
+   	_null: null
+ };
+ assign( testObjectA, testObjectB );
+ assert( testObjectA.hasOwnProperty( 'obj' ), true ) ;
+ assert( testObjectA.hasOwnProperty( 'arr' ) );
+ assert( testObjectA.hasOwnProperty( '_null' ), true );
 ```
 
 ## Installation
 
-```npm install element-data-set```
+```npm install @cfpb/object-assign```
 
 ## Contributing
 

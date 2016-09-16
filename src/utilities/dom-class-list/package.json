@@ -1,5 +1,5 @@
 {
-  "name": "@cfpb/dom-class-list",
+  "name": "dom-class-list",
   "version": "1.0.0",
   "description": "Utility functions to add, remove and toggle classes on a DOM element.",
   "main": "index.js",

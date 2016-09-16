@@ -1,25 +1,37 @@
-# Object-assign
+# Dom-closest
 
-Utility used to copy the values of all enumerable own properties from one or more source objects to a target object.
+Utility for finding the closest parent of the current element (or the current element itself) which matches the selector.
 
 ## Example
+
+
+### HTML
+
+```
+<div id="test-block-a" class="test-class test-class-a">
+ 	<div id="test-block-b" class="test-class-b" >
+		<div id="test-block-c" class="test-class-c"></div>
+	</div>
+</div>;
+```
 
 ### JS
 
 ```
 var assert = require( 'assert' );
-var assign = require( 'object-assign' ).assign;
+var closest = require( '@cfpb/dom-closest' ).closest;
+var testBlockA = document.getElementById( 'test-block-a' );
+var testBlockB = document.getElementById( 'test-block-b' );
+var element = domClosest( testBlockB, 'div' );
 
-  testObjectA = {
-    str:  'test',
-    func: function() { return 'testStr'; },
-    num:  1
-  };
+assert( element === testBlockB, true );
+element = domClosest( testBlockB, '.test-class' );
+assert( element === testBlockA );
 ```
 
 ## Installation
 
-```npm install element-data-set```
+```npm install @cfpb/dom-closest```
 
 ## Contributing
 

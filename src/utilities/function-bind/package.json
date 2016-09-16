@@ -1,6 +1,6 @@
 {
   "name": "@cfpb/function-bind",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility for binding a fuction to a given context.",
   "main": "index.js",
   "scripts": {
