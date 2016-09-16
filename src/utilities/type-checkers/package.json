@@ -1,6 +1,6 @@
 {
   "name": "type-checkers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Various utility functions to check Javascript types and primitives.",
   "main": "index.js",
   "scripts": {

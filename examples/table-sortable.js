@@ -1,6 +1,6 @@
 
 /* ==========================================================================
-   Table Sortablle
+   Table Sortable
 
    Mixin for sorting table organism.
 

@@ -13,7 +13,7 @@
 
 'use strict';
 
-var hasClassList = "classList" in document.createElement( '_' );
+var hasClassList = 'classList' in document.createElement( '_' );
 
 /**
  * Slice first element from passed arguments.
@@ -80,7 +80,7 @@ function removeClass( element ) {
     var classes = element.className.split( ' ' );
     removeClassNamesArray.forEach( function( className ) {
       if ( className ) {
-        classes.splice( classes.indexOf( className ), 1);
+        classes.splice( classes.indexOf( className ), 1 );
       }
     } );
     element.className = classes.join( ' ' );

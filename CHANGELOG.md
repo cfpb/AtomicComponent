@@ -8,7 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Added README files for utilities.
+
 ### Changed
+
+- Fixed issues with documentation and example code.
 
 ## [1.0.0] - 2016-09-09
 

@@ -1,5 +1,5 @@
 {
-  "name": "function-bind",
+  "name": "@cfpb/function-bind",
   "version": "1.0.0",
   "description": "Utility for binding a fuction to a given context.",
   "main": "index.js",

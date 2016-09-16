@@ -4,7 +4,7 @@ var BASE_JS_PATH = '../../../src';
 var chai = require( 'chai' );
 var expect = chai.expect;
 var jsdom = require( 'mocha-jsdom' );
-var functionBind = require( BASE_JS_PATH + '/utilities/function-bind' ).bind;
+var bind = require( BASE_JS_PATH + '/utilities/function-bind' ).bind;
 
 describe( 'function-bind', function() {
   jsdom();
@@ -12,7 +12,7 @@ describe( 'function-bind', function() {
     function() {
       var context = { testing: true };
       var mockFunction = function(){ return this };
-      var boundFunction = functionBind( mockFunction, context);
+      var boundFunction = bind( mockFunction, context );
       expect ( boundFunction() === context ).to.equal( true );
     }
   );

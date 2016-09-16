@@ -44,8 +44,7 @@ var TableRowLinks = {
     var elements = document.querySelector( TableRowLinks.ui.base );
     for ( var i = 0; i < elements.length; ++i ) {
       if( elements[i].hasAttribute( 'data-bound' ) === false ) {
-      elements[i].addEventListener( 'click', table,
-        TableRowLinks.onRowLinkClick );
+        elements[i].addEventListener( 'click', TableRowLinks.onRowLinkClick );
       }
     }
   }
