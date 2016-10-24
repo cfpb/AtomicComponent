@@ -1,7 +1,7 @@
 'use strict';
 
 // Required modules.
-var EventObserver = require( '../../mixins/Events.js' );
+var Events = require( '../../mixins/Events.js' );
 var BaseTransition = require( './BaseTransition' );
 var fnBind = require( '../function-bind' ).bind;
 
@@ -102,10 +102,9 @@ function MoveTransition( element ) { // eslint-disable-line max-statements, no-i
   }
 
   // Attach public events.
-  var eventObserver = new EventObserver();
-  this.addEventListener = eventObserver.addEventListener;
-  this.trigger = eventObserver.trigger;
-  this.removeEventListener = eventObserver.removeEventListener;
+  this.addEventListener = Events.on;
+  this.trigger = Events.trigger;
+  this.removeEventListener = Events.off;
 
   this.animateOff = _baseTransition.animateOff;
   this.animateOn = _baseTransition.animateOn;

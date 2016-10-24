@@ -1,7 +1,7 @@
 'use strict';
 
 // Required modules.
-var EventObserver = require( '../../mixins/Events.js' );
+var Events = require( '../../mixins/Events.js' );
 var BaseTransition = require( './BaseTransition' );
 var fnBind = require( '../function-bind' ).bind;
 
@@ -65,10 +65,9 @@ function AlphaTransition( element ) {
   }
 
   // Attach public events.
-  var eventObserver = new EventObserver();
-  this.addEventListener = eventObserver.addEventListener;
-  this.trigger = eventObserver.trigger;
-  this.removeEventListener = eventObserver.removeEventListener;
+  this.addEventListener = Events.addEventListener;
+  this.trigger = Events.trigger;
+  this.removeEventListener = Events.removeEventListener;
 
   this.animateOff = _baseTransition.animateOff;
   this.animateOn = _baseTransition.animateOn;
