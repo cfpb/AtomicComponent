@@ -31,7 +31,7 @@ describe( 'AtomicComponent', function() {
     function() {
       var element = document.getElementById( 'test-block-a');
       var initialize = sinon.spy();
-      var atomicComponent = new AtomicComponent( element, { initialize: [initialize] } );
+      var atomicComponent = new AtomicComponent( element, { initialize: initialize } );
       expect( atomicComponent.element === element ).to.equal( true );
       expect( atomicComponent.events ).to.be.an( 'object' );
       expect( initialize.called ).to.equal( true );

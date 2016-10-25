@@ -31,13 +31,14 @@ var isFunction = require('../utilities/type-checkers').isFunction;
  */
 function AtomicComponent( element, attributes ) {
   this.element = element;
-  this.initialize = [];
+  this.initializers = [];
   this.uId = this.uniqueId( 'ac' );
   assign( this, attributes );
   this.processModifiers();
   this.ensureElement();
   this.setCachedElements();
-  this.initialize.forEach( function( func ) {
+  this.initializers.push( this.initialize );
+  this.initializers.forEach( function( func ) {
     isFunction( func ) && func.apply( this, arguments );
   }, this );
   this.trigger( 'component:initialized' );
@@ -63,7 +64,7 @@ assign( AtomicComponent.prototype, Events, classList, {
     this.modifiers.forEach( function( modifier ) {
       if ( classList.contains( this.element, modifier.ui.base ) ) {
         if ( modifier.initialize ) {
-          this.initialize.push( modifier.initialize );
+          this.initializers.push( modifier.initialize );
           delete modifier.initialize;
         }
         assign( this, modifier );
