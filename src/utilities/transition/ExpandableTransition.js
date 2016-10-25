@@ -27,7 +27,6 @@ var CLASSES = {
 function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-statements, no-inline-comments, max-len
 
   var _baseTransition = new BaseTransition( element, CLASSES ),
-      maxHeight = element.clientHeight,
       timer,
       isAnimating = false;
 
@@ -84,7 +83,7 @@ function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-s
    * @returns {ExpandableTransition} An instance.
    */
   function expand() {
-    element.style.maxHeight = maxHeight + "px";
+    element.style.maxHeight = element.scrollHeight + 'px';
     _baseTransition.applyClass( CLASSES.EXPANDED );
 
     return this;
