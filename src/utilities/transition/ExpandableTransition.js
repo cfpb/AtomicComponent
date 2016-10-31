@@ -10,10 +10,10 @@ var removeClass = require( 'atomic-component/src/utilities/dom-class-list' ).rem
 
 // Exported constants.
 var CLASSES = {
-  BASE_CLASS:     'u-expandable-transition',
-  EXPANDED:       'u-expandable-expanded',
-  COLLAPSED:      'u-expandable-collapsed',
-  OPEN_DEFAULT:   'u-expandable-content__onload-open'
+  BASE_CLASS:   'u-expandable-transition',
+  EXPANDED:     'u-expandable-expanded',
+  COLLAPSED:    'u-expandable-collapsed',
+  OPEN_DEFAULT: 'u-expandable-content__onload-open'
 };
 
 /**
@@ -24,14 +24,16 @@ var CLASSES = {
  *
  * @param {HTMLNode} element
  *   DOM element to apply move transition to.
+ * @param {classes} Object
+ *   An Object of custom classes to override the base classes Object
  * @returns {ExpandableTransition} An instance. 
  */
-function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-statements, no-inline-comments, max-len
-
-  var _baseTransition = new BaseTransition( element, CLASSES ),
-      timer,
-      previousHeight,
-      isAnimating = false;
+function ExpandableTransition( element, classes ) { // eslint-disable-line max-statements, no-inline-comments, max-len
+  var classObject = classes || CLASSES;
+  var _baseTransition = new BaseTransition( element, classObject );
+  var timer;
+  var previousHeight;
+  var isAnimating = false;
 
   /**
    * @returns {ExpandableTransition} An instance.

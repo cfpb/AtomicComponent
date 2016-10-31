@@ -1,7 +1,7 @@
 'use strict';
 
 // Required modules.
-var EventObserver = require( '../../mixins/Events.js' );
+var Events = require( '../../mixins/Events.js' );
 var fnBind = require( '../function-bind' ).bind;
 
 /**
@@ -42,16 +42,16 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
 
   /**
    * Set the HTML element target of this transition.
-   * @param {HTMLNode} elem - The target of the transition.
+   * @param {HTMLNode} targetElement - The target of the transition.
    */
-  function setElement( elem ) {
+  function setElement( targetElement ) {
     // If the element has already been set,
     // clear the transition classes from the old element.
     if ( _dom ) {
       remove();
       animateOn();
     }
-    _dom = elem;
+    _dom = targetElement;
     _dom.classList.add( _classes.BASE_CLASS );
     _transitionEndEvent = _getTransitionEndEvent( _dom );
   }
@@ -194,7 +194,6 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
     return true;
   }
 
-  // TODO: Update Expandables to use a transition.
   /**
    * @param {HTMLNode} elem
    *   The element to check for support of transition end event.
@@ -214,10 +213,10 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
       transition:       'transitionend'
     };
 
-    for ( var t in transitions ) {
-      if ( transitions.hasOwnProperty( t ) &&
-           typeof elem.style[t] !== 'undefined' ) {
-        transition = transitions[t];
+    for ( var transitionEnd in transitions ) {
+      if ( transitions.hasOwnProperty( transitionEnd ) &&
+           typeof elem.style[transitionEnd] !== 'undefined' ) {
+        transition = transitions[transitionEnd];
         break;
       }
     }
@@ -225,10 +224,9 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
   }
 
   // Attach public events.
-  var eventObserver = new EventObserver();
-  this.addEventListener = eventObserver.addEventListener;
-  this.trigger = eventObserver.trigger;
-  this.removeEventListener = eventObserver.removeEventListener;
+  this.addEventListener = Events.on;
+  this.trigger = Events.trigger;
+  this.removeEventListener = Events.off;
 
   this.animateOff = animateOff;
   this.animateOn = animateOn;
