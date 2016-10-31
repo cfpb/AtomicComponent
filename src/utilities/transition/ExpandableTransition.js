@@ -5,6 +5,8 @@ var Events = require( '../../mixins/Events.js' );
 var BaseTransition = require( './BaseTransition' );
 var fnBind = require( '../function-bind' ).bind;
 var contains = require( '../dom-class-list' ).contains;
+var addClass = require( 'atomic-component/src/utilities/dom-class-list' ).addClass;
+var removeClass = require( 'atomic-component/src/utilities/dom-class-list' ).removeClass;
 
 // Exported constants.
 var CLASSES = {
@@ -22,12 +24,13 @@ var CLASSES = {
  *
  * @param {HTMLNode} element
  *   DOM element to apply move transition to.
- * @returns {ExpandableTransition} An instance.
+ * @returns {ExpandableTransition} An instance. 
  */
 function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-statements, no-inline-comments, max-len
 
   var _baseTransition = new BaseTransition( element, CLASSES ),
       timer,
+      previousHeight,
       isAnimating = false;
 
   /**
@@ -39,8 +42,12 @@ function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-s
     _baseTransition.addEventListener( BaseTransition.END_EVENT,
                                       _transitionCompleteBinded );
 
-    if ( !contains( element, CLASSES.OPEN_DEFAULT ) ) {
-      _baseTransition.applyClass( CLASSES.COLLAPSED );
+    if ( contains( element, CLASSES.OPEN_DEFAULT ) ) {
+      addClass( element, CLASSES.EXPANDED );
+      element.style.maxHeight = element.scrollHeight + 'px';
+    } else {
+      previousHeight = element.scrollHeight;
+      addClass( element, CLASSES.COLLAPSED );
     }
 
     return this;
@@ -51,6 +58,9 @@ function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-s
    */
   function _transitionComplete() {
     this.trigger( BaseTransition.END_EVENT, { target: this } );
+    if ( contains( element, CLASSES.EXPANDED ) && element.scrollHeight > previousHeight ) {
+      element.style.maxHeight = element.scrollHeight + 'px';
+    }
   }
 
   /**
@@ -72,8 +82,10 @@ function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-s
    * @returns {ExpandableTransition} An instance.
    */
   function collapse() {
+    previousHeight = element.scrollHeight;
     element.style.maxHeight = '0px';
-    _baseTransition.applyClass( CLASSES.COLLAPSED );
+    addClass( element, CLASSES.COLLAPSED );
+    removeClass( element, CLASSES.EXPANDED );
 
     return this;
   }
@@ -83,8 +95,9 @@ function ExpandableTransition( element, CLASSES ) { // eslint-disable-line max-s
    * @returns {ExpandableTransition} An instance.
    */
   function expand() {
-    element.style.maxHeight = element.scrollHeight + 'px';
-    _baseTransition.applyClass( CLASSES.EXPANDED );
+    element.style.maxHeight = previousHeight + 'px';
+    addClass( element, CLASSES.EXPANDED );
+    removeClass( element, CLASSES.COLLAPSED );
 
     return this;
   }
