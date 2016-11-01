@@ -85,7 +85,7 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    */
   function collapse() {
     previousHeight = element.scrollHeight;
-    element.style.maxHeight = '0px';
+    element.style.maxHeight = '0';
     addClass( element, CLASSES.COLLAPSED );
     removeClass( element, CLASSES.EXPANDED );
 
