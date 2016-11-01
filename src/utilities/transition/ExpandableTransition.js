@@ -118,6 +118,8 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
 
   this.init = init;
   this.toggleExpandable = toggleExpandable;
+  this.collapse = collapse;
+  this.expand = expand;
 
   return this;
 }
