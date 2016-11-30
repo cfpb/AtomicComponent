@@ -44,12 +44,12 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
     _baseTransition.addEventListener( BaseTransition.END_EVENT,
                                       _transitionCompleteBinded );
 
-    if ( contains( element, CLASSES.OPEN_DEFAULT ) ) {
-      addClass( element, CLASSES.EXPANDED );
+    if ( contains( element, classObject.OPEN_DEFAULT ) ) {
+      addClass( element, classObject.EXPANDED );
       element.style.maxHeight = element.scrollHeight + 'px';
     } else {
       previousHeight = element.scrollHeight;
-      addClass( element, CLASSES.COLLAPSED );
+      addClass( element, classObject.COLLAPSED );
     }
 
     return this;
@@ -60,7 +60,7 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    */
   function _transitionComplete() {
     this.trigger( BaseTransition.END_EVENT, { target: this } );
-    if ( contains( element, CLASSES.EXPANDED ) && element.scrollHeight > previousHeight ) {
+    if ( contains( element, classObject.EXPANDED ) && element.scrollHeight > previousHeight ) {
       element.style.maxHeight = element.scrollHeight + 'px';
     }
   }
@@ -70,7 +70,7 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    * @returns {ExpandableTransition} An instance
    */
   function toggleExpandable() {
-    if ( !contains( element, CLASSES.COLLAPSED ) ) {
+    if ( !contains( element, classObject.COLLAPSED ) ) {
       collapse();
     } else {
       expand();
@@ -86,8 +86,8 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
   function collapse() {
     previousHeight = element.scrollHeight;
     element.style.maxHeight = '0';
-    addClass( element, CLASSES.COLLAPSED );
-    removeClass( element, CLASSES.EXPANDED );
+    addClass( element, classObject.COLLAPSED );
+    removeClass( element, classObject.EXPANDED );
 
     return this;
   }
@@ -98,8 +98,8 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    */
   function expand() {
     element.style.maxHeight = previousHeight + 'px';
-    addClass( element, CLASSES.EXPANDED );
-    removeClass( element, CLASSES.COLLAPSED );
+    addClass( element, classObject.EXPANDED );
+    removeClass( element, classObject.COLLAPSED );
 
     return this;
   }
