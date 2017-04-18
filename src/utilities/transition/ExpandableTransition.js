@@ -5,8 +5,9 @@ var Events = require( '../../mixins/Events.js' );
 var BaseTransition = require( './BaseTransition' );
 var fnBind = require( '../function-bind' ).bind;
 var contains = require( '../dom-class-list' ).contains;
-var addClass = require( 'atomic-component/src/utilities/dom-class-list' ).addClass;
-var removeClass = require( 'atomic-component/src/utilities/dom-class-list' ).removeClass;
+var addClass = require( '../dom-class-list' ).addClass;
+var removeClass = require( '../dom-class-list' ).removeClass;
+var onReady = require( '../on-ready' ).onReady;
 
 // Exported constants.
 var CLASSES = {
@@ -26,7 +27,7 @@ var CLASSES = {
  *   DOM element to apply move transition to.
  * @param {classes} Object
  *   An Object of custom classes to override the base classes Object
- * @returns {ExpandableTransition} An instance. 
+ * @returns {ExpandableTransition} An instance.
  */
 function ExpandableTransition( element, classes ) { // eslint-disable-line max-statements, no-inline-comments, max-len
   var classObject = classes || CLASSES;
@@ -44,13 +45,15 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
     _baseTransition.addEventListener( BaseTransition.END_EVENT,
                                       _transitionCompleteBinded );
 
-    if ( contains( element, classObject.OPEN_DEFAULT ) ) {
-      addClass( element, classObject.EXPANDED );
-      element.style.maxHeight = element.scrollHeight + 'px';
-    } else {
-      previousHeight = element.scrollHeight;
-      addClass( element, classObject.COLLAPSED );
-    }
+    onReady( function() {
+      if ( contains( element, classObject.OPEN_DEFAULT ) ) {
+        addClass( element, classObject.EXPANDED );
+        element.style.maxHeight = element.scrollHeight + 'px';
+      } else {
+        previousHeight = element.scrollHeight;
+        addClass( element, classObject.COLLAPSED );
+      }
+    } );
 
     return this;
   }
