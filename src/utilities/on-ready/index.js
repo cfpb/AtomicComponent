@@ -37,6 +37,7 @@ function onReady( fn ) {
       for ( var i = 0, l = window.readyFunctions.length; i < l; i++ ) {
         window.readyFunctions[i]();
       }
+      window.readyFunctions = [];
     }
   };
 }
