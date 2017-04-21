@@ -23,7 +23,7 @@ function onReady( fn ) {
   }
 
   // If the ready state is already complete, run the passed function,
-  // otherwise add it to our saved arrray
+  // otherwise add it to our saved array
   if ( document.readyState === 'complete' ) {
     fn();
   } else {
@@ -36,7 +36,7 @@ function onReady( fn ) {
       for ( var i = 0, l = _readyFunctions.length; i < l; i++ ) {
         _readyFunctions[i]();
       }
-      _readyFunctions = [];
+      _readyFunctions.length = 0;
     }
   };
 
