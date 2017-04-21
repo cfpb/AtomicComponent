@@ -11,13 +11,13 @@ var _documentState;
 const DOCUMENT_STATES = {
   COMPLETE: 'complete',
   LOADING:  'loading'
-}
+};
 
 function setDocumentState( state ) {
   _documentState = state;
 }
 
-function triggerReadyState( state , time=100) {
+function triggerReadyState( state, time = 100 ) {
 
   return new Promise( function readyStateChange( resolve, reject ) {
     window.setTimeout( function() {
@@ -35,9 +35,9 @@ describe( 'on-ready', function() {
     onReady = require( BASE_JS_PATH + '/utilities/on-ready' ).onReady;
 
     Object.defineProperty( document, 'readyState', {
-         get: function() {
-            return _documentState
-          }
+      get: function() {
+        return _documentState;
+      }
     } );
   } );
 
@@ -63,7 +63,7 @@ describe( 'on-ready', function() {
 
     function() {
       var readyReturn;
-      var _readyFunctions
+      var _readyFunctions;
 
       onReady( function() {
         readyReturn = 'foo';
@@ -76,11 +76,11 @@ describe( 'on-ready', function() {
       expect( _readyFunctions.length ).to.equal( 2 );
 
       return triggerReadyState( DOCUMENT_STATES.COMPLETE )
-             .then( function () {
+              .then( function() {
                 expect( typeof _readyFunctions ).to.equal( 'object' );
                 expect( _readyFunctions.length ).to.equal( 0 );
-             } );
-      }
+              } );
+    }
   );
 
   it( 'should add a function to the saved array but not trigger it' +
@@ -88,7 +88,7 @@ describe( 'on-ready', function() {
 
     function() {
       var readyReturn;
-      var _readyFunctions
+      var _readyFunctions;
 
       onReady( function() {
         readyReturn = 'foo';
@@ -101,11 +101,11 @@ describe( 'on-ready', function() {
       expect( _readyFunctions.length ).to.equal( 2 );
 
       return triggerReadyState( DOCUMENT_STATES.LOADING )
-             .then( function () {
-                expect( typeof _readyFunctions ).to.equal( 'object' );
-                expect( _readyFunctions.length ).to.equal( 2 );
-             } );
-      }
+              .then( function () {
+                 expect( typeof _readyFunctions ).to.equal( 'object' );
+                 expect( _readyFunctions.length ).to.equal( 2 );
+              } );
+    }
   );
 
 } );
