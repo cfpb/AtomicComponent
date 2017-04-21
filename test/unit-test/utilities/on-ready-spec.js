@@ -37,31 +37,52 @@ describe( 'on-ready', function() {
 
   it( 'should return early if passed a string',
     function() {
-      onReady( 'foo' );
+      var _readyFuntions = onReady( 'foo' );
 
-      expect( typeof window.readyFuntions ).to.equal( 'undefined' );
-      expect( window.readyFunctions.length ).to.equal( 0 );
+      expect( typeof _readyFuntions ).to.equal( 'undefined' );
     }
   );
 
-  it( 'should add a funtion to the global array but not trigger it' +
+  it( 'should add a funtion to the saved array but not trigger it' +
        'till readyState completes',
     function() {
       var readyReturn;
 
-      onReady( function() {
+      var _readyFunctions = onReady( function() {
         readyReturn = 'foo';
       } );
 
-      expect( typeof window.readyFunctions ).to.equal( 'object' );
-      expect( window.readyFunctions.length ).to.equal( 1 );
+      expect( typeof _readyFunctions ).to.equal( 'object' );
+      expect( _readyFunctions.length ).to.equal( 1 );
+      expect( readyReturn ).to.equal( undefined );
+    }
+  );
+
+  // Due to the issue listed in the next two tests, this returns 3 instead
+  // of two because it's never firing and cleaning the array in the
+  // previous test
+  xit( 'should add a funtion to the saved array each time it is called',
+    function() {
+      var readyReturn;
+      var _readyFunctions;
+
+      _readyFunctions = onReady( function() {
+        readyReturn = 'foo';
+      } );
+
+      _readyFunctions = onReady( function() {
+        readyReturn = 'bar';
+      } );
+
+      expect( typeof _readyFunctions ).to.equal( 'object' );
+      expect( _readyFunctions.length ).to.equal( 2 );
       expect( readyReturn ).to.equal( undefined );
     }
   );
 
   // It seems that even though we're striggering the readyState,
   // it's not triggering the change in our coude
-  xit( 'should trigger the function after readyState completes',
+  xit( 'should trigger the saved functions after readyState completes',
     function() {
       var readyReturn;
 
@@ -80,7 +101,7 @@ describe( 'on-ready', function() {
   // I believe it's the same issue here
   xit( 'should clear the array after readyState completes',
     function() {
-      onReady( function() {
+      var _readyFunctions = onReady( function() {
         return 'foo';
       } );
 
@@ -88,7 +109,7 @@ describe( 'on-ready', function() {
         get: function() { return 'complete'; }
       } );
 
-      expect( window.readyFunctions.length ).to.equal( 0 );
+      expect( _readyFunctions.length ).to.equal( 0 );
     }
   );
 } );

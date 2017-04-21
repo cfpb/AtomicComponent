@@ -7,15 +7,14 @@
 
 'use strict';
 
-if ( !window.readyFunctions ) {
-  window.readyFunctions = [];
-}
+var _readyFunctions = [];
 
 /**
 * Checks if the document is ready, if it is, trigger the passed function,
 * if not, save the function to an array to be triggered after the page is loaded
 * @param {function} fn -
 *   Function to run only after the DOM has completely loaded
+* @returns {foo} bar
 */
 function onReady( fn ) {
   // Ensure we passed a function as the argument
@@ -28,18 +27,20 @@ function onReady( fn ) {
   if ( document.readyState === 'complete' ) {
     fn();
   } else {
-    window.readyFunctions.push( fn );
+    _readyFunctions.push( fn );
   }
 
   // When the ready state changes to complete, run the passed function
   document.onreadystatechange = function() {
     if ( document.readyState === 'complete' ) {
-      for ( var i = 0, l = window.readyFunctions.length; i < l; i++ ) {
-        window.readyFunctions[i]();
+      for ( var i = 0, l = _readyFunctions.length; i < l; i++ ) {
+        _readyFunctions[i]();
       }
-      window.readyFunctions = [];
+      _readyFunctions = [];
     }
   };
+
+  return _readyFunctions;
 }
 
 module.exports = {
