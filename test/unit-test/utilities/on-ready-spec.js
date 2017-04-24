@@ -101,9 +101,23 @@ describe( 'on-ready', function() {
       expect( _readyFunctions.length ).to.equal( 2 );
 
       return triggerReadyState( DOCUMENT_STATES.LOADING )
-              .then( function () {
-                 expect( typeof _readyFunctions ).to.equal( 'object' );
-                 expect( _readyFunctions.length ).to.equal( 2 );
+              .then( function() {
+                expect( typeof _readyFunctions ).to.equal( 'object' );
+                expect( _readyFunctions.length ).to.equal( 2 );
+              } );
+    }
+  );
+
+  it( 'should run the function if the page readyState has already completed',
+    function() {
+      var readyReturn;
+
+      return triggerReadyState( DOCUMENT_STATES.COMPLETE )
+              .then( function() {
+                onReady( function() {
+                  readyReturn = 'foo';
+                } );
+                expect( readyReturn ).to.equal( 'foo' );
               } );
     }
   );
