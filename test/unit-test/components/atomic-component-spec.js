@@ -31,7 +31,15 @@ describe( 'AtomicComponent', function() {
     function() {
       var element = document.getElementById( 'test-block-a');
       var initialize = sinon.spy();
-      var atomicComponent = new AtomicComponent( element, { initialize: initialize } );
+      var options = {
+        initialize: initialize,
+        events:     {
+          'keydown' : 'keyAction'
+        },
+        keyAction: sinon.stub()
+      };
+
+      var atomicComponent = new AtomicComponent( element, options );
       expect( atomicComponent.element === element ).to.equal( true );
       expect( atomicComponent.events ).to.be.an( 'object' );
       expect( initialize.called ).to.equal( true );
