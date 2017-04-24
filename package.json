@@ -40,6 +40,7 @@
     "jasmine-reporters": "^2.2.0",
     "jasmine-spec-reporter": "^2.7.0",
     "jsdom": "^9.4.2",
+    "jsdom-global": "^2.1.1",
     "mocha": "^3.0.2",
     "mocha-jsdom": "^1.1.0",
     "require-dir": "^0.3.0",
