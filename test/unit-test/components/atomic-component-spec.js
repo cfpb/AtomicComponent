@@ -34,7 +34,7 @@ describe( 'AtomicComponent', function() {
       var options = {
         initialize: initialize,
         events:     {
-          'keydown' : 'keyAction'
+          keydown: 'keyAction'
         },
         keyAction: sinon.stub()
       };
