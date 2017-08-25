@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Dom class list
 
@@ -13,7 +12,7 @@
 
 'use strict';
 
-var hasClassList = 'classList' in document.createElement( '_' );
+const hasClassList = 'classList' in document.createElement( '_' );
 
 /**
  * Slice first element from passed arguments.
@@ -33,13 +32,13 @@ function _sliceArgs( args ) {
  * @returns {HTMLNode} element - A DOM element.
  */
 function addClass( element ) {
-  var addClassNamesArray = _sliceArgs( arguments );
+  const addClassNamesArray = _sliceArgs( arguments );
   if ( hasClassList ) {
     element.classList.add.apply( element.classList, addClassNamesArray );
   } else {
     var classes = element.className.split( ' ' );
     addClassNamesArray.forEach( function( name ) {
-      if ( classes.indexOf( name ) ===-1 ) {
+      if ( classes.indexOf( name ) === -1 ) {
         classes.push( name );
       }
     } );
@@ -72,7 +71,7 @@ function contains( element, className ) {
  * @param {string} className - CSS selector.
  */
 function removeClass( element ) {
-  var removeClassNamesArray = _sliceArgs( arguments );
+  const removeClassNamesArray = _sliceArgs( arguments );
   if ( hasClassList ) {
     element.classList.remove
     .apply( element.classList, removeClassNamesArray );
@@ -97,7 +96,7 @@ function removeClass( element ) {
  * @returns {hasClass} Boolean indicating wether the flag existed.
  */
 function toggleClass( element, className, forceFlag ) {
-  var hasClass = false;
+  let hasClass = false;
   if ( hasClassList ) {
     hasClass = element.classList.toggle.apply( element.classList, className );
   } else if ( forceFlag === false || contains( element, className ) ) {
@@ -111,9 +110,10 @@ function toggleClass( element, className, forceFlag ) {
 }
 
 // Expose public methods.
-module.exports = { addClass: addClass,
-                   contains: contains,
-                   hasClassList: hasClassList,
-                   removeClass: removeClass,
-                   toggleClass: toggleClass
+module.exports = {
+  addClass: addClass,
+  contains: contains,
+  hasClassList: hasClassList,
+  removeClass: removeClass,
+  toggleClass: toggleClass
 };

@@ -12,7 +12,7 @@
 
 'use strict';
 
-var _toString = Object.prototype.toString;
+const _toString = Object.prototype.toString;
 
 /**
  * @name isUndefined

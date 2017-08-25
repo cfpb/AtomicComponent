@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Events
 
@@ -7,18 +6,18 @@
 
 'use strict';
 
-
-var Events = {
+const Events = {
 
   /**
    * Function used to add events to an event stack.
    *
-   * @param {string} eventName - The name of the event to add to the event stack.
+   * @param {string} eventName -
+   *   The name of the event to add to the event stack.
    * @param {Function} callback - Function to callback when event is triggered.
    * @returns {object} An instance.
    */
   on: function( eventName, callback ) {
-    var events = this.events = this.events || {};
+    const events = this.events = this.events || {};
     events[eventName] = this.events[eventName] || [];
     events[eventName].push( callback );
 
@@ -28,7 +27,8 @@ var Events = {
   /**
    * Function used to remove events from an event stack.
    *
-   * @param {string} eventName - The name of the event to remove from the event stack.
+   * @param {string} eventName -
+   *   The name of the event to remove from the event stack.
    * @returns {object} An instance.
    */
   off: function( eventName ) {
@@ -44,7 +44,7 @@ var Events = {
    * @returns {object} An instance.
    */
   trigger: function( eventName ) {
-    var events = this.events || {};
+    const events = this.events || {};
     if ( events.hasOwnProperty( eventName ) === false ) {
       return this;
     }

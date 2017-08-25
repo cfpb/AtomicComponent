@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Dom closest
 
@@ -21,11 +20,11 @@ function closest( element, selector ) {
     return element.closest( selector );
   }
 
-  var matchesSelector = element.matches ||
-                        element.webkitMatchesSelector ||
-                        element.mozMatchesSelector ||
-                        element.msMatchesSelector;
-  var match;
+  const matchesSelector = element.matches ||
+                          element.webkitMatchesSelector ||
+                          element.mozMatchesSelector ||
+                          element.msMatchesSelector;
+  let match;
 
   while ( element ) {
     if ( matchesSelector.bind( element )( selector ) ) {
