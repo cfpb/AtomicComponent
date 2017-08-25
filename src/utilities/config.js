@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Atomic configurations and constants
 
@@ -7,7 +6,7 @@
 'use strict';
 
 // Bit values intended to be used for bit inversion.
-var DIRECTIONS = {
+const DIRECTIONS = {
   UP: 0,
   RIGHT: 1,
   DOWN: -1,
@@ -16,7 +15,7 @@ var DIRECTIONS = {
 
 // Atomic component types used for describing component
 // hiearchy.
-var TYPES = {
+const TYPES = {
   PAGE: 1,
   TEMPLATE: 2,
   ORGANISM: 3,
@@ -26,7 +25,7 @@ var TYPES = {
 
 // Atomic Prefixes used for standardizing naming conventions
 // across HTML, CSS, and Javascript.
-var PREFIXES = {
+const PREFIXES = {
   PAGE: 'p-',
   TEMPLATE: 't-',
   ORGANISM: 'o-',
@@ -40,14 +39,14 @@ var PREFIXES = {
  *
  * @returns {undefined}.
  */
-function NO_OP_FUNCTION(){ return }
+function NO_OP_FUNCTION() { return; }
 
-var UNDEFINED;
+let UNDEFINED;
 
 module.exports = {
   DIRECTIONS: DIRECTIONS,
   NO_OP_FUNCTION: NO_OP_FUNCTION,
-  PREFIXES : PREFIXES,
-  TYPES : TYPES,
+  PREFIXES: PREFIXES,
+  TYPES: TYPES,
   UNDEFINED: UNDEFINED
-}
+};

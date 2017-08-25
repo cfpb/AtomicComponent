@@ -1,16 +1,16 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
-var chai = require( 'chai' );
-var expect = chai.expect;
-var jsdom = require( 'jsdom' );
-var sinon = require( 'sinon' );
+const BASE_JS_PATH = '../../../src';
+const chai = require( 'chai' );
+const expect = chai.expect;
+const jsdom = require( 'jsdom' );
+const sinon = require( 'sinon' );
 
-var AtomicComponent;
-var document;
-var Element;
+let AtomicComponent;
+let document;
+let Element;
 
-var HTML_SNIPPET =
+const HTML_SNIPPET =
 '<div id="test-block-a" class="test-class test-class-a">' +
   '<div id="test-block-b" class="test-class-b" >' +
     '<div id="test-block-c" class="test-class-c"></div>' +

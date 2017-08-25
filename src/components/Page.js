@@ -1,6 +1,3 @@
-
-'use strict';
-
 /* ==========================================================================
    Page
 
@@ -8,12 +5,14 @@
 
    ========================================================================== */
 
-var AtomicComponent = require( './AtomicComponent' );
-var TYPES = require( '../utilities/config' ).TYPES;
+'use strict';
 
-var Page = AtomicComponent.extend( {
+const AtomicComponent = require( './AtomicComponent' );
+const TYPES = require( '../utilities/config' ).TYPES;
+
+const Page = AtomicComponent.extend( {
   TYPE: TYPES.TEMPLATE,
-  CHILD_TYPES: [TYPES.TEMPLATE, TYPES.ORGANISM, TYPES.MOLECULE, TYPES.ATOM]
+  CHILD_TYPES: [ TYPES.TEMPLATE, TYPES.ORGANISM, TYPES.MOLECULE, TYPES.ATOM ]
 } );
 
 module.exports = Page;

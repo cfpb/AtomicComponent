@@ -1,16 +1,16 @@
 'use strict';
 
 // Required modules.
-var Events = require( '../../mixins/Events.js' );
-var BaseTransition = require( './BaseTransition' );
-var fnBind = require( '../function-bind' ).bind;
-var contains = require( '../dom-class-list' ).contains;
-var addClass = require( '../dom-class-list' ).addClass;
-var removeClass = require( '../dom-class-list' ).removeClass;
-var onReady = require( '../on-ready' ).onReady;
+const Events = require( '../../mixins/Events.js' );
+const BaseTransition = require( './BaseTransition' );
+const fnBind = require( '../function-bind' ).bind;
+const contains = require( '../dom-class-list' ).contains;
+const addClass = require( '../dom-class-list' ).addClass;
+const removeClass = require( '../dom-class-list' ).removeClass;
+const onReady = require( '../on-ready' ).onReady;
 
 // Exported constants.
-var CLASSES = {
+const CLASSES = {
   BASE_CLASS:   'u-expandable-transition',
   EXPANDED:     'u-expandable-expanded',
   COLLAPSED:    'u-expandable-collapsed',
@@ -25,23 +25,21 @@ var CLASSES = {
  *
  * @param {HTMLNode} element
  *   DOM element to apply move transition to.
- * @param {classes} Object
+ * @param {Object} classes
  *   An Object of custom classes to override the base classes Object
  * @returns {ExpandableTransition} An instance.
  */
 function ExpandableTransition( element, classes ) { // eslint-disable-line max-statements, no-inline-comments, max-len
-  var classObject = classes || CLASSES;
-  var _baseTransition = new BaseTransition( element, classObject );
-  var timer;
-  var previousHeight;
-  var isAnimating = false;
+  const classObject = classes || CLASSES;
+  const _baseTransition = new BaseTransition( element, classObject );
+  let previousHeight;
 
   /**
    * @returns {ExpandableTransition} An instance.
    */
   function init() {
     _baseTransition.init();
-    var _transitionCompleteBinded = fnBind( _transitionComplete, this );
+    const _transitionCompleteBinded = fnBind( _transitionComplete, this );
     _baseTransition.addEventListener( BaseTransition.END_EVENT,
                                       _transitionCompleteBinded );
 
@@ -63,20 +61,21 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    */
   function _transitionComplete() {
     this.trigger( BaseTransition.END_EVENT, { target: this } );
-    if ( contains( element, classObject.EXPANDED ) && element.scrollHeight > previousHeight ) {
+    if ( contains( element, classObject.EXPANDED ) &&
+         element.scrollHeight > previousHeight ) {
       element.style.maxHeight = element.scrollHeight + 'px';
     }
   }
 
   /**
    * Toggle the expandable
-   * @returns {ExpandableTransition} An instance
+   * @returns {ExpandableTransition} An instance.
    */
   function toggleExpandable() {
-    if ( !contains( element, classObject.COLLAPSED ) ) {
-      collapse();
-    } else {
+    if ( contains( element, classObject.COLLAPSED ) ) {
       expand();
+    } else {
+      collapse();
     }
 
     return this;

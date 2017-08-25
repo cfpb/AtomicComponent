@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Data set
 
@@ -8,7 +7,7 @@
 
 'use strict';
 
-var _assign = require('../object-assign').assign;
+const _assign = require( '../object-assign' ).assign;
 
 /**
  * Converts a string from selector-case to camelCase.
@@ -28,20 +27,20 @@ function _toCamelCase( str ) {
  * @param {HTMLElement} element - The element to check for dataset support.
  * @returns {Object} The data set.
  */
- function dataSet( element ) {
+function dataSet( element ) {
   if ( document.documentElement.dataset ) {
     return _assign( {}, element.dataset );
   }
-  var dataset = {};
-  var regex = /^data-(.+)/;
-  var attr;
-  var match;
+  const dataset = {};
+  const regex = /^data-(.+)/;
+  let attr;
+  let match;
 
   for ( var i = 0; i < element.attributes.length; i++ ) {
     attr = element.attributes[i];
     match = attr.name.match( regex );
     if ( match ) {
-      dataset[ _toCamelCase( match[1] ) ] = attr.value;
+      dataset[_toCamelCase( match[1] )] = attr.value;
     }
   }
 
@@ -50,5 +49,5 @@ function _toCamelCase( str ) {
 
 // Expose public methods.
 module.exports = {
-    dataSet: dataSet
+  dataSet: dataSet
 };

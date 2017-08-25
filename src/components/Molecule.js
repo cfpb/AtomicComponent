@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Molecule
 
@@ -8,12 +7,12 @@
 
 'use strict';
 
-var AtomicComponent = require( './AtomicComponent' );
-var TYPES = require( '../utilities/config' ).TYPES;
+const AtomicComponent = require( './AtomicComponent' );
+const TYPES = require( '../utilities/config' ).TYPES;
 
-var Molecule = AtomicComponent.extend( {
+const Molecule = AtomicComponent.extend( {
   TYPE: TYPES.MOLECULE,
-  CHILD_TYPES: [TYPES.ATOM]
+  CHILD_TYPES: [ TYPES.ATOM ]
 } );
 
 module.exports = Molecule;

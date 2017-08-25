@@ -1,12 +1,12 @@
 'use strict';
 
 // Required modules.
-var Events = require( '../../mixins/Events.js' );
-var BaseTransition = require( './BaseTransition' );
-var fnBind = require( '../function-bind' ).bind;
+const Events = require( '../../mixins/Events.js' );
+const BaseTransition = require( './BaseTransition' );
+const fnBind = require( '../function-bind' ).bind;
 
 // Exported constants.
-var CLASSES = {
+const CLASSES = {
   BASE_CLASS:     'u-move-transition',
   MOVE_TO_ORIGIN: 'u-move-to-origin',
   MOVE_LEFT:      'u-move-left',
@@ -28,14 +28,14 @@ var CLASSES = {
  */
 function MoveTransition( element ) { // eslint-disable-line max-statements, no-inline-comments, max-len
 
-  var _baseTransition = new BaseTransition( element, CLASSES );
+  const _baseTransition = new BaseTransition( element, CLASSES );
 
   /**
    * @returns {MoveTransition} An instance.
    */
   function init() {
     _baseTransition.init();
-    var _transitionCompleteBinded = fnBind( _transitionComplete, this );
+    const _transitionCompleteBinded = fnBind( _transitionComplete, this );
     _baseTransition.addEventListener( BaseTransition.END_EVENT,
                                       _transitionCompleteBinded );
     return this;
@@ -66,7 +66,7 @@ function MoveTransition( element ) { // eslint-disable-line max-statements, no-i
    */
   function moveLeft( count ) {
     count = count || 1;
-    var moveClasses = [
+    const moveClasses = [
       CLASSES.MOVE_LEFT,
       CLASSES.MOVE_LEFT_2X,
       CLASSES.MOVE_LEFT_3X

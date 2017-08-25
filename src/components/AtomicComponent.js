@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    AtomicComponent
 
@@ -13,12 +12,12 @@
 
 'use strict';
 
-var assign = require('../utilities/object-assign').assign;
-var bind = require('../utilities/function-bind').bind;
-var classList = require('../utilities/dom-class-list');
-var Delegate = require('dom-delegate').Delegate;
-var Events = require('../mixins/Events');
-var isFunction = require('../utilities/type-checkers').isFunction;
+const assign = require( '../utilities/object-assign' ).assign;
+const bind = require( '../utilities/function-bind' ).bind;
+const classList = require( '../utilities/dom-class-list' );
+const Delegate = require( 'dom-delegate' ).Delegate;
+const Events = require( '../mixins/Events' );
+const isFunction = require( '../utilities/type-checkers' ).isFunction;
 
 
 /**
@@ -39,7 +38,7 @@ function AtomicComponent( element, attributes ) {
   this.setCachedElements();
   this.initializers.push( this.initialize );
   this.initializers.forEach( function( func ) {
-    isFunction( func ) && func.apply( this, arguments );
+    if ( isFunction( func ) ) func.apply( this, arguments );
   }, this );
   this.trigger( 'component:initialized' );
 }
@@ -56,12 +55,12 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @param {Object} attributes -  Hash of attributes to set on base element.
    * @param {Object} atomicComponent -  Base component.
    */
-  processModifiers: function() {
+  processModifiers: () => {
     if ( !this.modifiers ) {
       return;
     }
 
-    this.modifiers.forEach( function( modifier ) {
+    this.modifiers.forEach( modifier => {
       if ( classList.contains( this.element, modifier.ui.base ) ) {
         if ( modifier.initialize ) {
           this.initializers.push( modifier.initialize );
@@ -118,7 +117,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    *
    * @returns {Object} Hash of event names and cached elements.
    */
-  setCachedElements: function() {
+  setCachedElements: () => {
     var key;
     var ui = assign( {}, this.ui );
     var element;
@@ -143,12 +142,12 @@ assign( AtomicComponent.prototype, Events, classList, {
    * Function used to remove the base element from the DOM
    * and unbind events.
    *
-   * @returns {true} Boolean indicating successful component teardown.
+   * @returns {boolean} True if successful in tearing down component.
    */
-  destroy: function() {
-    if (this.element) {
-      this.element.parentNode.removeChild(this.element);
-      if (this.element.view) delete this.element.view;
+  destroy: () => {
+    if ( this.element ) {
+      this.element.parentNode.removeChild( this.element );
+      if ( this.element.view ) delete this.element.view;
       delete this.element;
     }
     this.undelegateEvents();
@@ -163,11 +162,11 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @param {Object} attributes -  Hash of attributes to set on base element.
    */
   setElementAttributes: function( attributes ) {
-    var property;
+    let property;
 
-    for (property in attributes) {
-      if (attributes.hasOwnProperty(property)) {
-        this.element.setAttribute(property, attributes[property]);
+    for ( property in attributes ) {
+      if ( attributes.hasOwnProperty( property ) ) {
+        this.element.setAttribute( property, attributes[property] );
       }
     }
   },
@@ -210,7 +209,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @returns {AtomicComponent} An instance.
    */
   delegate: function( eventName, selector, listener ) {
-    this._delegate.on(eventName, selector, listener);
+    this._delegate.on( eventName, selector, listener );
 
     return this;
   },
@@ -224,7 +223,7 @@ assign( AtomicComponent.prototype, Events, classList, {
     if ( this._delegate ) {
       this._delegate.destroy();
     }
-    this.element.removeAttribute( 'data-bound' )
+    this.element.removeAttribute( 'data-bound' );
 
     return this;
   },
@@ -236,7 +235,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @returns {string} Prefixed unique id string.
    */
   uniqueId: function( prefix ) {
-    return prefix + '_' + Math.random().toString(36).substr(2, 9);
+    return prefix + '_' + Math.random().toString( 36 ).substr( 2, 9 );
   }
 
 } );
@@ -264,8 +263,8 @@ AtomicComponent.extend = function( attributes ) {
   }
 
   child.prototype = Object.create( AtomicComponent.prototype );
-  assign(child.prototype, attributes);
-  assign(child, AtomicComponent);
+  assign( child.prototype, attributes );
+  assign( child, AtomicComponent );
 
   if ( attributes.hasOwnProperty( 'ui' ) &&
   attributes.ui.hasOwnProperty( 'base' ) ) {
@@ -291,7 +290,7 @@ AtomicComponent.init = function() {
 
   for ( var i = 0; i < elements.length; ++i ) {
     element = elements[i];
-    if( element.hasAttribute( 'data-bound' ) === false ) {
+    if ( element.hasAttribute( 'data-bound' ) === false ) {
       components.push( new this( element ) );
     }
   }

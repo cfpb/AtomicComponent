@@ -1,8 +1,8 @@
 'use strict';
 
 // Required modules.
-var Events = require( '../../mixins/Events.js' );
-var fnBind = require( '../function-bind' ).bind;
+const Events = require( '../../mixins/Events.js' );
+const fnBind = require( '../function-bind' ).bind;
 
 /**
  * BaseTransition
@@ -19,15 +19,15 @@ var fnBind = require( '../function-bind' ).bind;
  * @returns {BaseTransition} An instance.
  */
 function BaseTransition( element, classes ) { // eslint-disable-line max-statements, no-inline-comments, max-len
-  var _classes = classes;
-  var _dom;
+  const _classes = classes;
+  let _dom;
 
-  var _lastClass;
-  var _transitionEndEvent;
-  var _transitionCompleteBinded;
-  var _addEventListenerBinded;
-  var _isAnimating = false;
-  var _isFlushed = false;
+  let _lastClass;
+  let _transitionEndEvent;
+  let _transitionCompleteBinded;
+  let _addEventListenerBinded;
+  let _isAnimating = false;
+  let _isFlushed = false;
 
   /**
    * @returns {BaseTransition} An instance.
@@ -143,7 +143,7 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
    * already been applied to this BaseTransition's target element.
    */
   function _flush() {
-    for ( var prop in _classes ) {
+    for ( const prop in _classes ) {
       if ( _classes.hasOwnProperty( prop ) &&
            _classes[prop] !== _classes.BASE_CLASS &&
            _dom.classList.contains( _classes[prop] ) ) {
@@ -201,19 +201,19 @@ function BaseTransition( element, classes ) { // eslint-disable-line max-stateme
    */
   function _getTransitionEndEvent( elem ) {
     if ( !elem ) {
-      var msg = 'Element does not have TransitionEnd event. It may be null!';
+      const msg = 'Element does not have TransitionEnd event. It may be null!';
       throw new Error( msg );
     }
 
-    var transition;
-    var transitions = {
+    let transition;
+    const transitions = {
       WebkitTransition: 'webkitTransitionEnd',
       MozTransition:    'transitionend',
       OTransition:      'oTransitionEnd otransitionend',
       transition:       'transitionend'
     };
 
-    for ( var transitionEnd in transitions ) {
+    for ( const transitionEnd in transitions ) {
       if ( transitions.hasOwnProperty( transitionEnd ) &&
            typeof elem.style[transitionEnd] !== 'undefined' ) {
         transition = transitions[transitionEnd];

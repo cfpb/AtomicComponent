@@ -25,8 +25,11 @@
   },
   "homepage": "https://github.com/cfpb/AtomicComponent#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
     "browser-sync": "^2.14.0",
-    "chai": "^3.5.0",
+    "chai": "^4.1.1",
     "glob-all": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
@@ -35,18 +38,19 @@
     "gulp-istanbul": "^1.1.1",
     "gulp-load-plugins": "^1.2.4",
     "gulp-mocha": "^3.0.1",
+    "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0",
     "jasmine-reporters": "^2.2.0",
-    "jasmine-spec-reporter": "^2.7.0",
+    "jasmine-spec-reporter": "^4.2.1",
     "jsdom": "^9.4.2",
     "jsdom-global": "^2.1.1",
+    "minimist": "^1.2.0",
     "mocha": "^3.0.2",
     "mocha-jsdom": "^1.1.0",
-    "require-dir": "^0.3.0",
-    "sinon": "^1.17.5",
-    "webpack": "^1.13.1",
-    "webpack-stream": "^3.2.0"
+    "require-dir": "^0.3.2",
+    "sinon": "^3.2.1",
+    "webpack": "^3.5.5",
+    "webpack-stream": "^4.0.0"
   },
   "dependencies": {
     "dom-delegate": "^2.0.3"

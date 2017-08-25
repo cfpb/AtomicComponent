@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Assign
 
@@ -29,11 +28,11 @@ function _isPlainObject( object ) {
 */
 function assign( destination ) {
   destination = destination || {};
-  for ( var i = 1; i < arguments.length; i++ ) {
-    var source = arguments[i] || {};
-    for ( var key in source ) {
+  for ( let i = 1, len = arguments.length; i < len; i++ ) {
+    const source = arguments[i] || {};
+    for ( const key in source ) {
       if ( Object.prototype.hasOwnProperty.call( source, key ) ) {
-        var value = source[key];
+        const value = source[key];
         if ( _isPlainObject( value ) ) {
           assign( destination[key] || ( destination[key] = {} ), value );
         } else {

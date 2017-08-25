@@ -1,12 +1,12 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
+const BASE_JS_PATH = '../../../src';
 
-var chai = require( 'chai' );
-var expect = chai.expect;
-var jsdom = require( 'jsdom-global' );
-var onReady;
-var _documentState;
+const chai = require( 'chai' );
+const expect = chai.expect;
+const jsdom = require( 'jsdom-global' );
+let onReady;
+let _documentState;
 
 const DOCUMENT_STATES = {
   COMPLETE: 'complete',
@@ -52,9 +52,9 @@ describe( 'on-ready', function() {
 
   it( 'should return early if passed a string',
     function() {
-      var _readyFuntions = onReady( 'foo' );
+      const _readyFuntions = onReady( 'foo' );
 
-      expect( typeof _readyFuntions ).to.equal( 'undefined' );
+      expect( _readyFuntions.length ).to.equal( 0 );
     }
   );
 
@@ -62,8 +62,8 @@ describe( 'on-ready', function() {
        'when readyState completes',
 
     function() {
-      var readyReturn;
-      var _readyFunctions;
+      let readyReturn;
+      let _readyFunctions;
 
       onReady( function() {
         readyReturn = 'foo';
