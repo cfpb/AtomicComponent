@@ -1,11 +1,11 @@
 'use strict';
 
-var fs = require( 'fs' );
-var globAll = require( 'glob-all' );
+const fs = require( 'fs' );
+const globAll = require( 'glob-all' );
 
-var BUILD = './build';
-var SRC = './src';
-var TEST = './test';
+const BUILD = './build';
+const SRC = './src';
+const TEST = './test';
 
 module.exports = {
   BUILD: BUILD,

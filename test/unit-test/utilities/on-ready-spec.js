@@ -20,9 +20,9 @@ function setDocumentState( state ) {
 function triggerReadyState( state, time = 100 ) {
 
   return new Promise( function readyStateChange( resolve, reject ) {
-    window.setTimeout( function() {
+    window.setTimeout( () => {
       setDocumentState( state );
-      var readyStateEvent = new Event( 'readystatechange' );
+      const readyStateEvent = new Event( 'readystatechange' );
       document.dispatchEvent( readyStateEvent );
       resolve( document );
     }, time );
@@ -30,7 +30,7 @@ function triggerReadyState( state, time = 100 ) {
 }
 
 describe( 'on-ready', function() {
-  before( function() {
+  before( () => {
     this.jsdom = jsdom();
     onReady = require( BASE_JS_PATH + '/utilities/on-ready' ).onReady;
 
@@ -41,14 +41,9 @@ describe( 'on-ready', function() {
     } );
   } );
 
-  beforeEach( function() {
-    setDocumentState( DOCUMENT_STATES.LOADING );
-  } );
+  beforeEach( () => setDocumentState( DOCUMENT_STATES.LOADING ) );
 
-  after( function() {
-    this.jsdom();
-  } );
-
+  after( () => this.jsdom() );
 
   it( 'should return early if passed a string',
     function() {
@@ -87,8 +82,8 @@ describe( 'on-ready', function() {
        'if state is loading',
 
     function() {
-      var readyReturn;
-      var _readyFunctions;
+      let readyReturn;
+      let _readyFunctions;
 
       onReady( function() {
         readyReturn = 'foo';
@@ -109,8 +104,8 @@ describe( 'on-ready', function() {
   );
 
   it( 'should run the function if the page readyState has already completed',
-    function() {
-      var readyReturn;
+    () => {
+      let readyReturn;
 
       return triggerReadyState( DOCUMENT_STATES.COMPLETE )
               .then( function() {
@@ -121,5 +116,4 @@ describe( 'on-ready', function() {
               } );
     }
   );
-
 } );

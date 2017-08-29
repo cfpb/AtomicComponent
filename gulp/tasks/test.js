@@ -2,7 +2,8 @@
 
 const configTest = require( '../config' ).tests;
 const gulp = require( 'gulp' );
-const plugins = require( 'gulp-load-plugins' )();
+const gulpIstanbul = require( 'gulp-istanbul' );
+const gulpMocha = require( 'gulp-mocha' );
 
 /**
 * Run Mocha JavaScript unit tests.
@@ -11,16 +12,16 @@ const plugins = require( 'gulp-load-plugins' )();
 
 function unitTest( cb ) {
   gulp.src( configTest.src )
-  .pipe( plugins.istanbul( {
+  .pipe( gulpIstanbul( {
     includeUntested: true
   } ) )
-  .pipe( plugins.istanbul.hookRequire() )
+  .pipe( gulpIstanbul.hookRequire() )
   .on( 'finish', () => {
     gulp.src( configTest.test + '/unit-test/**/*.js' )
-    .pipe( plugins.mocha( {
+    .pipe( gulpMocha( {
       reporter: 'nyan'
     } ) )
-    .pipe( plugins.istanbul.writeReports( {
+    .pipe( gulpIstanbul.writeReports( {
       dir: configTest.test + '/unit-test-coverage'
     } ) )
     .on( 'end', cb );

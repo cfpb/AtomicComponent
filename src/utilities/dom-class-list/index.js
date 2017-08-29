@@ -90,15 +90,15 @@ function removeClass( element ) {
  * Toggle CSS class on an element.
  *
  * @param {HTMLNode} element - A DOM element.
- * @param {className} className - CSS selector.
+ * @param {string} className - CSS selector.
  * @param {boolean} forceFlag - Boolean indicating whether
                                 to forcibly remove class.
- * @returns {hasClass} Boolean indicating wether the flag existed.
+ * @returns {boolean} True if the flag existed, false otherwise.
  */
 function toggleClass( element, className, forceFlag ) {
   let hasClass = false;
   if ( hasClassList ) {
-    hasClass = element.classList.toggle.apply( element.classList, className );
+    hasClass = element.classList.toggle( className );
   } else if ( forceFlag === false || contains( element, className ) ) {
     removeClass( element, forceFlag );
   } else {

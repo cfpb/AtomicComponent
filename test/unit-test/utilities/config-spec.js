@@ -1,13 +1,11 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
-var chai = require( 'chai' );
-var expect = chai.expect;
-var jsdom = require( 'mocha-jsdom' );
-var config = require( BASE_JS_PATH + '/utilities/config' );
+const BASE_JS_PATH = '../../../src';
+const chai = require( 'chai' );
+const expect = chai.expect;
+const config = require( BASE_JS_PATH + '/utilities/config' );
 
-describe( 'config', function() {
-  jsdom();
+describe( 'config', () => {
   it( 'should return the proper configurations and constants',
     function() {
       expect( config.DIRECTIONS ).to.be.an( 'object' );

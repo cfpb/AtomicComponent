@@ -1,37 +1,35 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
-var Events = require( BASE_JS_PATH + '/mixins/Events' );
+const BASE_JS_PATH = '../../../src';
+const Events = require( BASE_JS_PATH + '/mixins/Events' );
 
-var chai = require( 'chai' );
-var expect = chai.expect;
-var jsdom = require( 'mocha-jsdom' );
-var sinon = require( 'sinon' );
-var mockEvent
-var spy1;
-var spy2;
+const chai = require( 'chai' );
+const expect = chai.expect;
+const jsdom = require( 'jsdom' );
+const { JSDOM } = jsdom;
+const sinon = require( 'sinon' );
+let dom;
+let mockEvent
+let spy1;
+let spy2;
 
-
-beforeEach( function() {
+beforeEach( () => {
   mockEvent = { events: {} };
   mockEvent = Object.assign( mockEvent,  Events );
   spy1 = sinon.spy();
   spy2 = sinon.spy();
+  dom = new JSDOM(`<!DOCTYPE html>`);
 } );
 
 describe( 'Events', function() {
-  jsdom();
-
-  it( 'should add the correct methods to an object when mixed in',
-    function() {
+  it( 'should add the correct methods to an object when mixed in', () => {
       expect( mockEvent.on ).to.be.an('function');
       expect( mockEvent.off ).to.be.an('function');
       expect( mockEvent.trigger ).to.be.an('function');
     }
   );
 
-  it( 'should correctly add event listeners',
-    function() {
+  it( 'should correctly add event listeners', () => {
       mockEvent.on('click', spy1 );
       expect( mockEvent.events['click'][0] === spy1 ).to.equal( true );
       mockEvent.on('click', spy2 );
@@ -40,8 +38,7 @@ describe( 'Events', function() {
     }
   );
 
-  it( 'should correctly trigger event listeners',
-    function() {
+  it( 'should correctly trigger event listeners', () => {
       mockEvent = Object.assign( mockEvent,  Events );
       mockEvent.on('click', spy1 );
       mockEvent.trigger( 'click' );
@@ -50,8 +47,7 @@ describe( 'Events', function() {
     }
   );
 
-  it( 'should correctly remove event listeners',
-    function() {
+  it( 'should correctly remove event listeners', () => {
       mockEvent.on('click', spy1 );
       expect( mockEvent.events['click'][0] === spy1 ).to.equal( true );
       mockEvent.on('click', spy2 );
@@ -63,5 +59,4 @@ describe( 'Events', function() {
       expect( spy2.called ).to.equal( false );
     }
   );
-
 } );
