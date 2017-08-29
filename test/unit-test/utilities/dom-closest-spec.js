@@ -1,78 +1,76 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
+const BASE_JS_PATH = '../../../src';
 
-var chai = require( 'chai' );
-var expect = chai.expect;
-var domClosest = require( BASE_JS_PATH + '/utilities/dom-closest' ).closest;
-var jsdom = require( 'jsdom' );
-var sinon = require( 'sinon' );
-var sandbox;
+const chai = require( 'chai' );
+const expect = chai.expect;
+const sinon = require( 'sinon' );
 
-var testBlockA;
-var testBlockB;
-var testBlockC;
-var testBlockD;
-var UNDEFINED;
+let domClosest;
+let sandbox;
 
-var HTML_SNIPPET =
-'<section id="test-block-a">' +
-  '<div id="test-block-b">' +
-    '<div id="test-block-c" >' +
-      '<div id="test-block-d"></div>' +
-    '</div>' +
-  '</div>' +
-'</section>';
+let testBlockA;
+let testBlockB;
+let testBlockC;
+let testBlockD;
+let UNDEFINED;
 
-describe( 'dom-closest', function() {
-  var jsDomDoc = jsdom.jsdom(HTML_SNIPPET);
-  var document = jsDomDoc.defaultView.document;
+const HTML_SNIPPET =
+  `<section id="test-block-a">
+    <div id="test-block-b">
+      <div id="test-block-c" >
+        <div id="test-block-d"></div>
+      </div>
+    </div>
+  </section>`;
 
-  before( function() {
+describe( 'dom-closest', () => {
+
+  before( () => {
+    this.jsdom = require( 'jsdom-global' )( HTML_SNIPPET );
+    domClosest = require( BASE_JS_PATH + '/utilities/dom-closest' ).closest;
     testBlockA = document.getElementById( 'test-block-a' );
     testBlockB = document.getElementById( 'test-block-b' );
     testBlockC = document.getElementById( 'test-block-c' );
     testBlockD = document.getElementById( 'test-block-d' );
   } );
 
+  after( () => this.jsdom() );
+
   it( 'should find the current DOM node if the node matches the selector',
-    function() {
-      var element = domClosest( testBlockD, 'div' );
+    () => {
+      let element = domClosest( testBlockD, 'div' );
       expect ( element === testBlockD ).to.equal( true );
       element = domClosest( testBlockD, 'div div' );
       expect ( element === testBlockD ).to.equal( true );
     }
-    );
+  );
 
-  it( 'should return null if a node isn\'t found',
-    function() {
-      var element = domClosest( testBlockA, '.test-block' );
+  it( 'should return null if a node isn\'t found', () => {
+      let element = domClosest( testBlockA, '.test-block' );
       expect ( element === null ).to.equal( true );
       element = domClosest( testBlockA, 'div.test' );
       expect ( element === null ).to.equal( true );
     }
-    );
+  );
 
-  it( 'should return the correct parent node',
-    function() {
-      var element = domClosest( testBlockD, 'section' );
+  it( 'should return the correct parent node', () => {
+      let element = domClosest( testBlockD, 'section' );
       expect ( element === testBlockA ).to.equal( true );
       element = domClosest( testBlockC, 'section > div' );
       expect ( element === testBlockB ).to.equal( true );
     }
     );
 
-  it( 'should use the native closest method if it exists',
-    function() {
-      var spy = testBlockD.closest = sinon.spy();
-      var element = domClosest( testBlockD, 'section' );
+  it( 'should use the native closest method if it exists', () => {
+      const spy = testBlockD.closest = sinon.spy();
+      const element = domClosest( testBlockD, 'section' );
       expect ( spy.called ).to.equal( true );
     }
     );
 
-  it( 'should use the correct matches method',
-    function() {
-      var spy = sinon.spy();
+  it( 'should use the correct matches method', () => {
+      const spy = sinon.spy();
       delete testBlockD.closest;
       testBlockD.matches = UNDEFINED;
       testBlockD.webkitMatchesSelector = spy;

@@ -12,8 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-- gulp-uglify, replaced with webpack uglify plugin.
+- `gulp-uglify` replaced with webpack uglify plugin.
+- Unused `jasmine-spec-reporter`, `jasmine-reporters`, `gulp-clean`,
+`gulp-coveralls`, and `browser-sync`.
 - Unused `timer` and `isAnimating` variables from `ExpandableTransition`.
+- Refactored to remove `gulp-load-plugins`.
+- Refactored to remove `mocha-jsdom`.
 
 ### Changed
 
@@ -21,8 +25,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Updated lint gulp task to support auto-fixing.
 - Fixed codebase linter errors.
 - Updated JS syntax to ES6.
-- `webpack`, `webpack-stream`, `chai`, `jasmine-spec-reporter`, `require-dir`,
+- `webpack`, `webpack-stream`, `chai`, `require-dir`,
 and `sinon` to latest.
+- dom-class-list toggleClass method had unnecessary apply method.
 
 
 ## [1.3.0] - 2017-4-24

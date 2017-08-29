@@ -1,18 +1,15 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
-var chai = require( 'chai' );
-var expect = chai.expect;
-var jsdom = require( 'mocha-jsdom' );
-var bind = require( BASE_JS_PATH + '/utilities/function-bind' ).bind;
+const BASE_JS_PATH = '../../../src';
+const bind = require( BASE_JS_PATH + '/utilities/function-bind' ).bind;
+const chai = require( 'chai' );
+const expect = chai.expect;
 
-describe( 'function-bind', function() {
-  jsdom();
-  it( 'should bind the proper context',
-    function() {
-      var context = { testing: true };
-      var mockFunction = function(){ return this };
-      var boundFunction = bind( mockFunction, context );
+describe( 'function-bind', () => {
+  it( 'should bind the proper context', () => {
+      const context = { testing: true };
+      const mockFunction = function(){ return this };
+      const boundFunction = bind( mockFunction, context );
       expect ( boundFunction() === context ).to.equal( true );
     }
   );

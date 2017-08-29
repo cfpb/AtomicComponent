@@ -1,18 +1,19 @@
 'use strict';
 
-var BASE_JS_PATH = '../../../src';
-var chai = require( 'chai' );
-var jsdom = require( 'mocha-jsdom' );
+const BASE_JS_PATH = '../../../src';
+const chai = require( 'chai' );
+const expect = chai.expect;
 
-beforeEach( function() {
-  jsdom({
-    done: function( errors, window ) {
-      if ( errors ) throw new Error( 'jsdom Error' );
-      var atom = require( BASE_JS_PATH + '/components/Atom' );
-    }
+const HTML_SNIPPET = ``;
+let atom;
+
+describe( 'Atom', () => {
+  before( () => {
+    this.jsdom = require( 'jsdom-global' )( HTML_SNIPPET );
+    atom = require( BASE_JS_PATH + '/components/Atom' );
   } );
-} )
 
-describe( 'Atom', function() {
+  after( () => this.jsdom() );
+
   // TODO: Implement tests.
 } );
