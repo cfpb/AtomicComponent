@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Removed
+
+### Changed
+
+
+## [1.3.1] - 2017-8-30
+
+### Added
+
 - Babel for JS transpiling ES6.
 
 ### Removed
