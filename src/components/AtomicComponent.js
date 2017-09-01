@@ -55,7 +55,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @param {Object} attributes -  Hash of attributes to set on base element.
    * @param {Object} atomicComponent -  Base component.
    */
-  processModifiers: () => {
+  processModifiers: function() {
     if ( !this.modifiers ) {
       return;
     }
@@ -117,7 +117,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    *
    * @returns {Object} Hash of event names and cached elements.
    */
-  setCachedElements: () => {
+  setCachedElements: function() {
     var key;
     var ui = assign( {}, this.ui );
     var element;
@@ -144,7 +144,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    *
    * @returns {boolean} True if successful in tearing down component.
    */
-  destroy: () => {
+  destroy: function() {
     if ( this.element ) {
       this.element.parentNode.removeChild( this.element );
       if ( this.element.view ) delete this.element.view;
