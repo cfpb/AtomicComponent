@@ -17,7 +17,13 @@ Molecules are prefixed with “m-” in CSS, JavaScript, and HTML files.
 ```
 <div class="m-notification">
     <span class="m-notification_icon cf-icon"></span>
-    <div class="m-notification_content" role="alert"></div>
+    <div class="m-notification_content" role="alert">
+        <div class="h4 m-notification_message">message</div>
+            <p class="h4 m-notification_explanation">
+              Please check the URL and try again.
+            </p>
+        </div>
+    </div>
 </div>
 ```
 
@@ -26,24 +32,23 @@ Molecules are prefixed with “m-” in CSS, JavaScript, and HTML files.
 .m-notification {
     display: none;
     position: relative;
-    padding: @m-notification-padding__px;
-    padding-left: 40px;
+    padding: @notification-padding__px;
     …
-  ```
+```
 
 **JavaScript**:
 ```
-var CONSTANTS = { MESSAGE: 'message', EXPLANATION: 'explanation' };
+const CONSTANTS = { MESSAGE: 'message', EXPLANATION: 'explanation' };
 
-var NotificationMolecule = Molecule.extend( {
+const NotificationMolecule = Molecule.extend( {
       classes: {
         isVisible:    'm-notification__visible'
       },
 
       ui: {
         base:        '.m-notification',
-        explanation: 'm-notification_explanation',
-        message:     'm-notification_message'
+        explanation: '.m-notification_explanation',
+        message:     '.m-notification_message'
       },
 
       initialize: function() {

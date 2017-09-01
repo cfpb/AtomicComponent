@@ -10,13 +10,13 @@
 const _readyFunctions = [];
 
 /**
-* Checks if the document is ready, if it is, trigger the passed function,
-* if not, push the function to an array to be triggered after the page
-* is loaded.
-* @param {Function} fn -
-*   Function to run only after the DOM has completely loaded.
-* @returns {Array} List of functions to run after the DOM has loaded.
-*/
+ * Checks if the document is ready, if it is, trigger the passed function,
+ * if not, push the function to an array to be triggered after the page
+ * is loaded.
+ * @param {Function} fn -
+ *   Function to run only after the DOM has completely loaded.
+ * @returns {Array} List of functions to run after the DOM has loaded.
+ */
 function onReady( fn ) {
   // Ensure we passed a function as the argument
   if ( typeof fn !== 'function' ) {

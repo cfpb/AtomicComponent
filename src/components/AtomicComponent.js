@@ -55,12 +55,12 @@ assign( AtomicComponent.prototype, Events, classList, {
    * @param {Object} attributes -  Hash of attributes to set on base element.
    * @param {Object} atomicComponent -  Base component.
    */
-  processModifiers: () => {
+  processModifiers: function() {
     if ( !this.modifiers ) {
       return;
     }
 
-    this.modifiers.forEach( modifier => {
+    this.modifiers.forEach( function( modifier ) {
       if ( classList.contains( this.element, modifier.ui.base ) ) {
         if ( modifier.initialize ) {
           this.initializers.push( modifier.initialize );
@@ -117,7 +117,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    *
    * @returns {Object} Hash of event names and cached elements.
    */
-  setCachedElements: () => {
+  setCachedElements: function() {
     var key;
     var ui = assign( {}, this.ui );
     var element;
@@ -144,7 +144,7 @@ assign( AtomicComponent.prototype, Events, classList, {
    *
    * @returns {boolean} True if successful in tearing down component.
    */
-  destroy: () => {
+  destroy: function() {
     if ( this.element ) {
       this.element.parentNode.removeChild( this.element );
       if ( this.element.view ) delete this.element.view;
@@ -231,7 +231,7 @@ assign( AtomicComponent.prototype, Events, classList, {
   /**
    * Function used to set the attributes on an element.
    *
-   * @param {Object} prefix - String to use a prefix.
+   * @param {string} prefix - String to use a prefix.
    * @returns {string} Prefixed unique id string.
    */
   uniqueId: function( prefix ) {

@@ -13,7 +13,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 
-## [1.3.1] - 2017-8-30
+## [1.3.2] - 2017-09-05
+
+### Changed
+
+- BUG: Reverted arrow functions within `AtomicComponent` in order to properly
+handle the binded value of `this`.
+- Fixed typos in code comments.
+
+## [1.3.1] - 2017-08-30
 
 ### Added
 
@@ -39,7 +47,7 @@ and `sinon` to latest.
 - dom-class-list toggleClass method had unnecessary apply method.
 
 
-## [1.3.0] - 2017-4-24
+## [1.3.0] - 2017-04-24
 
 - Added onReady utility for saving functionality until document
   load has completed

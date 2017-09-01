@@ -13,8 +13,8 @@ const Events = {
    *
    * @param {string} eventName -
    *   The name of the event to add to the event stack.
-   * @param {Function} callback - Function to callback when event is triggered.
-   * @returns {object} An instance.
+   * @param {Function} callback - Function to call when event is triggered.
+   * @returns {Object} An instance.
    */
   on: function( eventName, callback ) {
     const events = this.events = this.events || {};
@@ -29,7 +29,7 @@ const Events = {
    *
    * @param {string} eventName -
    *   The name of the event to remove from the event stack.
-   * @returns {object} An instance.
+   * @returns {Object} An instance.
    */
   off: function( eventName ) {
     if ( this.events && this.events[eventName] ) delete this.events[eventName];
@@ -41,7 +41,7 @@ const Events = {
    * Function used to trigger events that exist on the event stack.
    *
    * @param {string} eventName - The name of the event to trigger.
-   * @returns {object} An instance.
+   * @returns {Object} An instance.
    */
   trigger: function( eventName ) {
     const events = this.events || {};
