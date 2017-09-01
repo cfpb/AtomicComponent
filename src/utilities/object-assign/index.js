@@ -11,9 +11,9 @@
 'use strict';
 
 /**
-* @param {object} object - JavaScript object.
-* @returns {boolean} True if object is plain Javascript object.
-*/
+ * @param {object} object - JavaScript object.
+ * @returns {boolean} True if object is a plain JavaScript object.
+ */
 function _isPlainObject( object ) {
   return Object.prototype.toString.call( object ) === '[object Object]';
 }

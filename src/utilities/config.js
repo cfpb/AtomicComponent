@@ -13,8 +13,7 @@ const DIRECTIONS = {
   LEFT: -2
 };
 
-// Atomic component types used for describing component
-// hiearchy.
+// Atomic component types used for describing component hierarchy.
 const TYPES = {
   PAGE: 1,
   TEMPLATE: 2,

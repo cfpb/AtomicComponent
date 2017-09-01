@@ -53,7 +53,7 @@ function addClass( element ) {
  *
  * @param {HTMLNode} element - A DOM element.
  * @param {string} className - CSS selector.
- * @returns {Boolean} indicating if element has class.
+ * @returns {boolean} True if `element` contains class `className`.
  */
 function contains( element, className ) {
   className = className.replace( '.', '' );
@@ -91,8 +91,8 @@ function removeClass( element ) {
  *
  * @param {HTMLNode} element - A DOM element.
  * @param {string} className - CSS selector.
- * @param {boolean} forceFlag - Boolean indicating whether
-                                to forcibly remove class.
+ * @param {boolean} forceFlag - True if `className` class
+                                should be forcibly removed.
  * @returns {boolean} True if the flag existed, false otherwise.
  */
 function toggleClass( element, className, forceFlag ) {
