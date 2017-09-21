@@ -23,14 +23,7 @@ function exampleScripts() {
             options: {
               presets: [ [ 'env', {
                 targets: {
-                  browsers: [
-                    'last 2 version',
-                    'Edge >= 11',
-                    'not ie <= 8',
-                    'android 4',
-                    'BlackBerry 7',
-                    'BlackBerry 10'
-                  ]
+                  browsers: config.supportedBrowsers
                 },
                 debug: true
               } ] ]
@@ -42,14 +35,7 @@ function exampleScripts() {
       output: {
         filename: 'example.js'
       },
-      plugins: [
-        // Change warnings flag to true to view linter-style warnings at runtime.
-        new webpack.optimize.UglifyJsPlugin( {
-          compress: { warnings: true }
-        } )
-      ]
     }, webpack ) )
-    .pipe( gulpRename( 'example.min.js' ) )
     .pipe( gulp.dest( config.BUILD ) );
 }
 
@@ -67,14 +53,7 @@ function buildScripts() {
             options: {
               presets: [ [ 'env', {
                 targets: {
-                  browsers: [
-                    'last 2 version',
-                    'Edge >= 11',
-                    'not ie <= 8',
-                    'android 4',
-                    'BlackBerry 7',
-                    'BlackBerry 10'
-                  ]
+                  browsers: config.supportedBrowsers
                 },
                 debug: true
               } ] ]
@@ -84,16 +63,9 @@ function buildScripts() {
         } ]
       },
       output: {
-        filename: 'main.js'
-      },
-      plugins: [
-        // Change warnings flag to true to view linter-style warnings at runtime.
-        new webpack.optimize.UglifyJsPlugin( {
-          compress: { warnings: true }
-        } )
-      ]
+        filename: 'index.js'
+      }
     }, webpack ) )
-    .pipe( gulpRename( 'main.min.js' ) )
     .pipe( gulp.dest( config.BUILD ) );
 }
 gulp.task( 'buildScripts', buildScripts );

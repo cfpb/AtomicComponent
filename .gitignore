@@ -70,6 +70,7 @@ __pycache__/
 node_modules/
 bower_components/
 vendor/
+lib/
 
 # Floobits #
 ############
