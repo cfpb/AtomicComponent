@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 
+## [1.4.0] - 2017-09-21
+
+### Changed
+
+- Transpile source to lib/ dir for npm publishing
+
 ## [1.3.2] - 2017-09-05
 
 ### Changed
