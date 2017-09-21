@@ -66,7 +66,7 @@ NotificationMolecule.init();
 In addition to `gulp watch`, there are a number of other important gulp tasks, particularly `gulp build` and `gulp test`, which will build the project and test it, respectively. Using the `gulp --tasks` command you can view all available tasks. The important ones are listed below:
 
 ```
-gulp build           # Concatenate, optimize, and copy source files to the /build/ directory.
+gulp build           # Concatenate, optimize, and copy source files to the /lib/ directory.
 gulp lint            # Lint the scripts and build files.
 gulp test            # Run unit tests.
 ```
