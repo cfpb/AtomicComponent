@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Changed
+- Bugfix: ExpandableTransition was not firing transitionComplete event.
 
 
 ## [1.4.0] - 2017-09-21
