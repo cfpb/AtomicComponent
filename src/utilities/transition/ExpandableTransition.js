@@ -1,13 +1,11 @@
 'use strict';
 
 // Required modules.
-const Events = require( '../../mixins/Events.js' );
-const BaseTransition = require( './BaseTransition' );
-const fnBind = require( '../function-bind' ).bind;
-const contains = require( '../dom-class-list' ).contains;
-const addClass = require( '../dom-class-list' ).addClass;
-const removeClass = require( '../dom-class-list' ).removeClass;
-const onReady = require( '../on-ready' ).onReady;
+const Events = require( 'atomic-component/src/mixins/Events.js' );
+const BaseTransition = require( 'atomic-component/src/utilities/transition/BaseTransition' );
+const contains = require( 'atomic-component/src/utilities/dom-class-list' ).contains;
+const fnBind = require( 'atomic-component/src/utilities/function-bind' ).bind;
+const onReady = require( 'atomic-component/src/utilities//on-ready' ).onReady;
 
 // Exported constants.
 const CLASSES = {
@@ -45,11 +43,11 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
 
     onReady( function() {
       if ( contains( element, classObject.OPEN_DEFAULT ) ) {
-        addClass( element, classObject.EXPANDED );
+        _baseTransition.applyClass( classObject.EXPANDED );
         element.style.maxHeight = element.scrollHeight + 'px';
       } else {
         previousHeight = element.scrollHeight;
-        addClass( element, classObject.COLLAPSED );
+        _baseTransition.applyClass( classObject.COLLAPSED );
       }
     } );
 
@@ -88,8 +86,7 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
   function collapse() {
     previousHeight = element.scrollHeight;
     element.style.maxHeight = '0';
-    addClass( element, classObject.COLLAPSED );
-    removeClass( element, classObject.EXPANDED );
+    _baseTransition.applyClass( classObject.COLLAPSED );
 
     return this;
   }
@@ -100,8 +97,7 @@ function ExpandableTransition( element, classes ) { // eslint-disable-line max-s
    */
   function expand() {
     element.style.maxHeight = previousHeight + 'px';
-    addClass( element, classObject.EXPANDED );
-    removeClass( element, classObject.COLLAPSED );
+    _baseTransition.applyClass( classObject.EXPANDED );
 
     return this;
   }
