@@ -21,13 +21,21 @@ var TableSortable = {
   },
 
   events: {
-    'click .sortable': 'onSortableClick'
+    'click .sortable': 'onSortableClick',
+    'keydown document.body': 'onKeyDown'
   },
 
   ui: {
   	base:       '.o-table__sortable',
     tableBody:  'tbody',
     sortButton: '.sorted-up, .sorted-down'
+  },
+
+   /**
+   * Function used to create computed and triggered properties.
+   */
+  onKeyDown: function() {
+    console.log( 'keydown' );
   },
 
   /**
