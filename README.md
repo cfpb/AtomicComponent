@@ -9,7 +9,7 @@ Micro Framework for building Atomic Components.
 
 ## Usage
 
-This framework is intended to be used in conjuction with adherance to Atomic Design principles. It helps provide a uniform way to build Atomic components using HTML, CSS, and JavaScript. An example use case in building a Molecule is as follows:
+This framework is intended to be used in conjunction with adherence to Atomic Design principles. It helps provide a uniform way to build Atomic components using HTML, CSS, and JavaScript. An example use case in building a Molecule is as follows:
 
 Molecules are prefixed with “m-” in CSS, JavaScript, and HTML files.
 
