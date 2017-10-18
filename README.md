@@ -1,4 +1,7 @@
 
+# :warning: THIS REPO IS DEPRECATED (10/17/2017) :warning:
+Please migrate to using [capital-framework](https://github.com/cfpb/capital-framework).
+
 # AtomicComponent
 
 Micro Framework for building Atomic Components.
